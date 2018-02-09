@@ -85,6 +85,8 @@ namespace GameConsole
                     }
                 }
             }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.SetCursorPosition(0, Display.Height);
             Console.Write(sbClearline);
             Console.SetCursorPosition(0, Display.Height);

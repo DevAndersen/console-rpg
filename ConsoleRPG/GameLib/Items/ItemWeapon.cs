@@ -8,9 +8,24 @@ namespace GameLib.Items
 {
     public class ItemWeapon : Item
     {
-        public ItemWeapon(string name) : base(name, false)
-        {
+        public WeaponType Type { get; }
+        public WeaponMaterial Material { get; }
 
+        public override string Name
+        {
+            get
+            {
+                string materialString = Material.DefaultText;
+                string typeString = Type.DefaultText;
+
+                return $"{Material.DefaultText} {Type.DefaultText}";
+            }
+        }
+
+        public ItemWeapon(WeaponType type, WeaponMaterial material) : base(string.Empty, false)
+        {
+            Type = type;
+            Material = material;
         }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="Items\ItemStack.cs" />
     <Compile Include="Items\ItemWeapon.cs" />
     <Compile Include="Items\WeaponMaterial.cs" />
+    <Compile Include="Items\WeaponType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Displays\Display.cs" />
     <Compile Include="Rendering\Displays\DisplaySplash.cs" />

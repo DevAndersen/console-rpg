@@ -11,6 +11,7 @@ namespace GameLib.Items
         public struct Materials
         {
             public static readonly WeaponMaterial wood = new WeaponMaterial("Wooden", 1);
+            public static readonly WeaponMaterial iron = new WeaponMaterial("Iron", 2);
         }
 
         public string DefaultText { get; set; }

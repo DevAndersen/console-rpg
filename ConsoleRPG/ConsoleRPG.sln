@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTest", "GameTest\GameTest.csproj", "{FDD5376F-5056-4255-9179-2A0E50A0F7E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleClient\ConsoleClient.csproj", "{9EB9C31B-DC09-4304-B31A-15EF7EDDB340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLib", "GameLib\GameLib.csproj", "{E51E0445-35E3-4DA4-A55B-09C599B823F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDD5376F-5056-4255-9179-2A0E50A0F7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD5376F-5056-4255-9179-2A0E50A0F7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD5376F-5056-4255-9179-2A0E50A0F7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD5376F-5056-4255-9179-2A0E50A0F7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB9C31B-DC09-4304-B31A-15EF7EDDB340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB9C31B-DC09-4304-B31A-15EF7EDDB340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB9C31B-DC09-4304-B31A-15EF7EDDB340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB9C31B-DC09-4304-B31A-15EF7EDDB340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E51E0445-35E3-4DA4-A55B-09C599B823F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E51E0445-35E3-4DA4-A55B-09C599B823F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E51E0445-35E3-4DA4-A55B-09C599B823F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E51E0445-35E3-4DA4-A55B-09C599B823F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CBCABD7-B8AA-49E5-9AE8-92009DFE819A}
+	EndGlobalSection
+EndGlobal

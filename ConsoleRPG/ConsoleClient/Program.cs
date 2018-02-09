@@ -13,9 +13,13 @@ namespace GameConsole
 {
     class Program : IGameHandler
     {
+        private Pxl[,] grid;
+        private StringBuilder sbClearline = new StringBuilder().Append(' ', Display.Width);
+
         static void Main(string[] args)
         {
             new Program().StartGame();
+            Console.ReadLine();
             Console.WriteLine("GAME OVER");
             Console.ReadLine();
         }
@@ -23,52 +27,67 @@ namespace GameConsole
         public void StartGame()
         {
             Console.WindowWidth = Display.Width;
-            Console.WindowHeight = Display.Height + 1;
+            Console.WindowHeight = Display.Height + 2;
+            grid = new Pxl[Display.Width, Display.Height];
             
             Core.StartGame(this);
         }
 
-        private void Render(Pxl[,] grid)
+        private void Render(Pxl[,] newGrid)
         {
             Console.SetCursorPosition(0, 0);
-            for (int y = 0; y < grid.GetLength(1); y++)
+            for (int y = 0; y < newGrid.GetLength(1); y++)
             {
-                for (int x = 0; x < grid.GetLength(0); x++)
+                for (int x = 0; x < newGrid.GetLength(0); x++)
                 {
-                    Pxl pxl = grid[x, y];
+                    Pxl pxl = newGrid[x, y];
 
-                    if(pxl == null)
+                    if (Equals(pxl, grid[x, y]))
                     {
-                        Console.Write(" ");
+                        grid[x, y] = pxl;
                     }
                     else
                     {
-                        if (pxl.ForegroundColor.HasValue && pxl.ForegroundColor != Console.ForegroundColor)
-                        {
-                            Console.ForegroundColor = pxl.ForegroundColor.Value;
-                        }
+                        grid[x, y] = pxl;
 
-                        if (pxl.BackgroundColor.HasValue && pxl.BackgroundColor != Console.BackgroundColor)
-                        {
-                            Console.BackgroundColor = pxl.BackgroundColor.Value;
-                        }
+                        Console.SetCursorPosition(x, y);
 
-                        if(pxl.Char == null)
+                        if (pxl == null)
                         {
                             Console.Write(" ");
                         }
                         else
                         {
-                            Console.Write(pxl.Char);
-                        }
+                            if (pxl.ForegroundColor.HasValue && pxl.ForegroundColor != Console.ForegroundColor)
+                            {
+                                Console.ForegroundColor = pxl.ForegroundColor.Value;
+                            }
 
-                        if(pxl.WaitMs > 0)
-                        {
-                            WaitMs(pxl.WaitMs);
+                            if (pxl.BackgroundColor.HasValue && pxl.BackgroundColor != Console.BackgroundColor)
+                            {
+                                Console.BackgroundColor = pxl.BackgroundColor.Value;
+                            }
+
+                            if (pxl.Char == null)
+                            {
+                                Console.Write(" ");
+                            }
+                            else
+                            {
+                                Console.Write(pxl.Char);
+                            }
+
+                            if (pxl.WaitMs > 0)
+                            {
+                                WaitMs(pxl.WaitMs);
+                            }
                         }
                     }
                 }
             }
+            Console.SetCursorPosition(0, Display.Height);
+            Console.Write(sbClearline);
+            Console.SetCursorPosition(0, Display.Height);
         }
 
         public void OnDisplayUpdate(Pxl[,] grid)

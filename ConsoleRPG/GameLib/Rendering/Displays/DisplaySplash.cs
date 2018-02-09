@@ -18,6 +18,7 @@ namespace GameLib.Rendering.Displays
             b = !b;
             c = b ? 'X' : ' ';
             i++;
+            ReadLine();
             return i < 5 ? new DisplaySplash() : null;
         }
 

@@ -20,5 +20,20 @@ namespace GameLib.Rendering
             BackgroundColor = backgroundColor;
             WaitMs = waitMs;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (this == null && obj == null)
+                return true;
+
+            if (obj is Pxl pxl)
+            {
+                bool charEqual = Char == pxl.Char;
+                bool foreEqual = ForegroundColor == pxl.ForegroundColor;
+                bool backEqual = BackgroundColor == pxl.BackgroundColor;
+                return charEqual && foreEqual && backEqual;
+            }
+            return false;
+        }
     }
 }

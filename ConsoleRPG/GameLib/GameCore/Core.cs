@@ -41,8 +41,8 @@ namespace GameLib.GameCore
             currentDisplay = new DisplaySplash();
             while(currentDisplay != null)
             {
-                NextDisplay = currentDisplay.Run();
                 OnDisplayUpdate.Invoke(currentDisplay.Render());
+                NextDisplay = currentDisplay.Run();
                 currentDisplay = NextDisplay;
             }
             Logger.GetLog().ToList().ForEach(x => Console.WriteLine($"[{x.timestamp.ToString("hh:mm:ss")}] <{x.level}>\t{x.message}"));

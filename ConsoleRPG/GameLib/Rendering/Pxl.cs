@@ -8,10 +8,10 @@ namespace GameLib.Rendering
 {
     public class Pxl
     {
-        public char? Char { get; set; }
-        public ConsoleColor? ForegroundColor { get; set; }
-        public ConsoleColor? BackgroundColor { get; set; }
-        public int WaitMs { get; set; }
+        public char? Char { get; }
+        public ConsoleColor? ForegroundColor { get; }
+        public ConsoleColor? BackgroundColor { get; }
+        public int WaitMs { get; }
 
         public Pxl(char? character = null, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
@@ -34,6 +34,20 @@ namespace GameLib.Rendering
                 return charEqual && foreEqual && backEqual;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Auto generated.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            var hashCode = -893613736;
+            hashCode = hashCode * -1521134295 + EqualityComparer<char?>.Default.GetHashCode(Char);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ConsoleColor?>.Default.GetHashCode(ForegroundColor);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ConsoleColor?>.Default.GetHashCode(BackgroundColor);
+            hashCode = hashCode * -1521134295 + WaitMs.GetHashCode();
+            return hashCode;
         }
     }
 }

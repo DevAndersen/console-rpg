@@ -32,8 +32,8 @@ namespace GameLib.Rendering.Displays
                     //grid[x, y] = new Pxl(c);
                 }
             }
-
-            DrawResource("dummyResource", 0, 0);
+            
+            DrawResource("test", 14, 14);
         }
     }
 }

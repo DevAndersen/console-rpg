@@ -12,7 +12,7 @@ namespace GameLib.GameCore
 
         public static void Log(string message, LoggingLevel level)
         {
-            if(level != LoggingLevel.Debug && !(Core.instance != null && Core.instance.DebugMode))
+            if((level != LoggingLevel.Debug) || (level == LoggingLevel.Debug && Core.instance != null && Core.instance.DebugMode))
             {
                 log.Add((message, level, DateTime.Now));
             }

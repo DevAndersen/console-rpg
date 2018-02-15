@@ -15,7 +15,7 @@ namespace GameConsole
     {
         private Pxl[,] grid;
         private StringBuilder sbClearline = new StringBuilder().Append(' ', Display.Width);
-
+        
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
@@ -51,6 +51,8 @@ namespace GameConsole
                     {
                         grid[x, y] = pxl;
 
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.SetCursorPosition(x, y);
 
                         if (pxl == null)

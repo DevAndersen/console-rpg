@@ -32,8 +32,9 @@ namespace GameLib.Rendering.Displays
                     //grid[x, y] = new Pxl(c);
                 }
             }
-            
-            DrawResource("test", 14, 14);
+
+            DrawResource("test", 0, 0, ConsoleColor.DarkCyan);
+            DrawResource("test2", 2, 0, ConsoleColor.Gray);
         }
     }
 }

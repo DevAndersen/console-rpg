@@ -65,6 +65,15 @@ namespace GameLib.Rendering.Displays
             Core.instance.WaitMs(ms);
         }
 
+        /// <summary>
+        /// Draws the specified resource, according to the specified parameters. In the resource, '~' will not be drawn, allowing for "transparency".
+        /// </summary>
+        /// <param name="resourceKey"></param>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <param name="foregroundColor"></param>
+        /// <param name="backgroundColor"></param>
+        /// <param name="waitMs"></param>
         protected void DrawResource(string resourceKey, int posX, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             char[,] resource = ResourceProvider.GetResource(resourceKey);
@@ -88,7 +97,10 @@ namespace GameLib.Rendering.Displays
             {
                 for (int y = 0; y < resourceHeight; y++)
                 {
-                    grid[posX + x, posY + y] = new Pxl(resource[y, x], foregroundColor, backgroundColor, waitMs);
+                    if(resource[y, x] != '~')
+                    {
+                        grid[posX + x, posY + y] = new Pxl(resource[y, x], foregroundColor, backgroundColor, waitMs);
+                    }
                 }
             }
         }

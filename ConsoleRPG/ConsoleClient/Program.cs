@@ -18,6 +18,7 @@ namespace GameConsole
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             new Program().StartGame();
             Console.ReadLine();
             Console.WriteLine("GAME OVER");

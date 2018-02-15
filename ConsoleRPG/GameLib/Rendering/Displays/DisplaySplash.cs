@@ -8,20 +8,29 @@ namespace GameLib.Rendering.Displays
 {
     public class DisplaySplash : Display
     {
-        int i;
+        bool initial = true;
 
         public override Display Run()
         {
-            i++;
+            if(initial)
+            {
+                initial = false;
+                return this;
+            }
             return null;
         }
 
         protected override void RenderDisplay()
         {
-            DrawResource("test", 0, 0, ConsoleColor.DarkCyan);
-            DrawResource("test2", 2, 0, ConsoleColor.Gray);
-            Write("heya", 146, 39);
-            WriteCentered("heyaa", 10);
+            if(initial)
+            {
+                prefabs.ClearDisplay();
+            }
+            else
+            {
+                prefabs.RenderMenuBorder("This is my text");
+                Write("This is a demo string", 10, 10, ConsoleColor.Red, ConsoleColor.Green);
+            }
         }
     }
 }

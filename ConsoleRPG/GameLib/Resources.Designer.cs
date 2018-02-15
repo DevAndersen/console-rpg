@@ -63,19 +63,9 @@ namespace GameLib {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] test {
+        internal static byte[] menuBorder {
             get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] test2 {
-            get {
-                object obj = ResourceManager.GetObject("test2", resourceCulture);
+                object obj = ResourceManager.GetObject("menuBorder", resourceCulture);
                 return ((byte[])(obj));
             }
         }

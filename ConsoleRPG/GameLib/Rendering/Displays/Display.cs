@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
-    public abstract class Display
+    public abstract partial class Display
     {
         public static int Width { get { return 150; } }
         public static int Height { get { return 40; } }
@@ -20,6 +20,11 @@ namespace GameLib.Rendering.Displays
         public abstract Display Run();
 
         protected abstract void RenderDisplay();
+
+        protected Display()
+        {
+            prefabs = new Prefabs(this);
+        }
 
         public Pxl[,] Render()
         {
@@ -65,7 +70,7 @@ namespace GameLib.Rendering.Displays
             Core.instance.WaitMs(ms);
         }
 
-        protected void Write(string text, int posX, int posY)
+        protected void Write(string text, int posX, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             if (posX < 0 || posY < 0 || posX + text.Length > Width || posY >= Height)
             {
@@ -74,14 +79,14 @@ namespace GameLib.Rendering.Displays
             }
             for (int i = 0; i < text.Length; i++)
             {
-                grid[posX + i, posY] = new Pxl(text[i]);
+                grid[posX + i, posY] = new Pxl(text[i], foregroundColor, backgroundColor, waitMs);
             }
         }
 
-        protected void WriteCentered(string text, int posY)
+        protected void WriteCentered(string text, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             int x = Width / 2 - text.Length / 2;
-            Write(text, x, posY);
+            Write(text, x, posY, foregroundColor, backgroundColor, waitMs);
         }
 
         /// <summary>
@@ -123,6 +128,5 @@ namespace GameLib.Rendering.Displays
                 }
             }
         }
-
     }
 }

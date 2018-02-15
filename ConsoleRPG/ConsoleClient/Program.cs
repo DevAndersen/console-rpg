@@ -23,6 +23,7 @@ namespace GameConsole
             Console.ReadLine();
             Console.WriteLine("GAME OVER");
             Console.ReadLine();
+            DisplaySplash d = new DisplaySplash();
         }
 
         public void StartGame()
@@ -55,8 +56,15 @@ namespace GameConsole
                     {
                         grid[x, y] = pxl;
 
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.Gray;
+                        if(Console.ForegroundColor != ConsoleColor.Gray)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                        }
+                        if (Console.BackgroundColor != ConsoleColor.Black)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                        }
+
                         Console.SetCursorPosition(x, y);
 
                         if (pxl == null)

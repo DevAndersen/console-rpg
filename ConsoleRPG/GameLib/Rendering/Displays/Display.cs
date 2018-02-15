@@ -65,6 +65,25 @@ namespace GameLib.Rendering.Displays
             Core.instance.WaitMs(ms);
         }
 
+        protected void Write(string text, int posX, int posY)
+        {
+            if (posX < 0 || posY < 0 || posX + text.Length > Width || posY >= Height)
+            {
+                Logger.Log($"Tried to write string '{text}' outside display for {GetType()}.", LoggingLevel.Error);
+                return;
+            }
+            for (int i = 0; i < text.Length; i++)
+            {
+                grid[posX + i, posY] = new Pxl(text[i]);
+            }
+        }
+
+        protected void WriteCentered(string text, int posY)
+        {
+            int x = Width / 2 - text.Length / 2;
+            Write(text, x, posY);
+        }
+
         /// <summary>
         /// Draws the specified resource, according to the specified parameters. In the resource, '~' will not be drawn, allowing for "transparency".
         /// </summary>
@@ -80,7 +99,7 @@ namespace GameLib.Rendering.Displays
 
             if (resource == null)
             {
-                Logger.Log($"Could not find resource {resourceKey} for display {GetType()}.", LoggingLevel.Error);
+                Logger.Log($"Could not find resource '{resourceKey}' for display {GetType()}.", LoggingLevel.Error);
                 return;
             }
 
@@ -89,7 +108,7 @@ namespace GameLib.Rendering.Displays
 
             if(posX < 0 || posY < 0 || posX + resourceWidth > Width || posY + resourceHeight > Height)
             {
-                Logger.Log($"Tried to draw resource {resourceKey} outside display for {GetType()}.", LoggingLevel.Error);
+                Logger.Log($"Tried to draw resource '{resourceKey}' outside display for {GetType()}.", LoggingLevel.Error);
                 return;
             }
 
@@ -104,5 +123,6 @@ namespace GameLib.Rendering.Displays
                 }
             }
         }
+
     }
 }

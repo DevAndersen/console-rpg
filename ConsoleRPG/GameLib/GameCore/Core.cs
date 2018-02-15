@@ -17,7 +17,7 @@ namespace GameLib.GameCore
 
         public IGameHandler gameHandler;
 
-        public bool DebugMode { get; set; }
+        public bool DebugMode { get; set; } = true;
 
         private Display currentDisplay;
         private Display NextDisplay;
@@ -45,7 +45,6 @@ namespace GameLib.GameCore
                 NextDisplay = currentDisplay.Run();
                 currentDisplay = NextDisplay;
             }
-            Logger.GetLog().ToList().ForEach(x => Console.WriteLine($"[{x.timestamp.ToString("hh:mm:ss")}] <{x.level}>\t{x.message}"));
         }
 
         public ConsoleKeyInfo ReadKey()

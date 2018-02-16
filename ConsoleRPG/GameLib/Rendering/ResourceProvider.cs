@@ -36,9 +36,7 @@ namespace GameLib.Rendering
                 string key = entry.Key.ToString();
                 byte[] bytes = (byte[])entry.Value;
                 dictionary[key] = TranslateResource(bytes);
-                //Console.WriteLine($"> {key} {BitConverter.ToString(bytes)}");
             }
-            //Console.ReadLine();
         }
 
         private static char[,] TranslateResource(byte[] bytes)

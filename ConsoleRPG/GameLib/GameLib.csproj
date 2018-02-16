@@ -76,7 +76,9 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Resources\menuBorder" />
+    <None Include="Resources\menuBorderHorizontalLine" />
     <None Include="Resources\menuBorderVerticalLine" />
+    <None Include="Resources\menuBorderVerticalLine39" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -27,5 +27,14 @@ namespace GameLib.Items
                 Logger.Log($"Failed at instantiating itemstack {item}x{amount}.", LoggingLevel.Critical);
             }
         }
+
+        public override string ToString()
+        {
+            if(Item.Stackable)
+            {
+                return $"{Amount} x {Item.Name}";
+            }
+            return $"{Item.Name}";
+        }
     }
 }

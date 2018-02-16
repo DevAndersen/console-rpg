@@ -11,10 +11,12 @@ namespace GameLib.Items
     public class Inventory
     {
         private ItemStack[] items;
+        public string Name { get; }
         public int Size { get { return items.Length; } }
 
-        public Inventory(int size)
+        public Inventory(string name, int size)
         {
+            Name = name;
             if(size <= 0)
             {
                 Logger.Log($"Attempted to instantiate inventory of size {size}.", LoggingLevel.Error);

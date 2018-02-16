@@ -25,7 +25,7 @@ namespace GameLib.Rendering.Displays
             switch(ReadKey())
             {
                 case ConsoleKey.Enter:
-                    return new DisplayInventory(this, null);
+                    return new DisplayInventory(this, new Items.Inventory("Inventory", 30));
                 case ConsoleKey.X:
                     return null;
                 default:

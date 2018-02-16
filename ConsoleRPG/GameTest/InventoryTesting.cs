@@ -18,7 +18,7 @@ namespace GameTest
         [TestMethod]
         public void Inventory_Success_AddStackable()
         {
-            Inventory inv = new Inventory(inventorySize);
+            Inventory inv = new Inventory("", inventorySize);
 
             for (int i = 0; i < inventorySize; i++)
             {
@@ -42,7 +42,7 @@ namespace GameTest
         [TestMethod]
         public void Inventory_Success_AddNonStackable()
         {
-            Inventory inv = new Inventory(inventorySize);
+            Inventory inv = new Inventory("", inventorySize);
 
             for (int i = 0; i < inventorySize; i++)
             {
@@ -59,7 +59,7 @@ namespace GameTest
         [TestMethod]
         public void Inventory_Fail_AddStackable_DifferentItem()
         {
-            Inventory inv = new Inventory(inventorySize);
+            Inventory inv = new Inventory("", inventorySize);
 
             bool addedStackableSuccesfully = inv.AddItemStack(new ItemStack(testItemStackable));
             Assert.AreEqual(true, addedStackableSuccesfully);
@@ -77,7 +77,7 @@ namespace GameTest
         [TestMethod]
         public void Inventory_Fail_AddStackable_TooManyItems()
         {
-            Inventory inv = new Inventory(inventorySize);
+            Inventory inv = new Inventory("", inventorySize);
 
             for (int i = 0; i < inventorySize; i++)
             {
@@ -92,7 +92,7 @@ namespace GameTest
         [TestMethod]
         public void Inventory_Fail_AddNonstackable_TooManyItems()
         {
-            Inventory inv = new Inventory(inventorySize);
+            Inventory inv = new Inventory("", inventorySize);
 
             for (int i = 0; i < inventorySize; i++)
             {

@@ -1,5 +1,4 @@
 ﻿using GameLib.GameCore;
-using GameLib.Rendering.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +9,19 @@ namespace GameLib.Rendering.Displays
 {
     public abstract partial class Display
     {
-        public static int Width { get { return 150; } }
-        public static int Height { get { return 40; } }
+        public static int Width { get { return 151; } }
+        public static int Height { get { return 41; } }
 
         protected Pxl[,] grid = new Pxl[Width, Height];
-
-        protected Menu menu;
+        protected Display previousDisplay;
 
         public abstract Display Run();
 
         protected abstract void RenderDisplay();
 
-        protected Display()
+        protected Display(Display previousDisplay)
         {
+            this.previousDisplay = previousDisplay;
             prefabs = new Prefabs(this);
         }
 
@@ -31,11 +30,6 @@ namespace GameLib.Rendering.Displays
             Array.Clear(grid, 0, grid.Length);
 
             RenderDisplay();
-
-            if(menu != null)
-            {
-                Pxl[,] menuGrid = menu.Render();
-            }
 
             return grid;
         }

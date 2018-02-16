@@ -25,6 +25,12 @@ namespace GameLib.Rendering.Displays
                 display.WriteCentered(text, 1);
             }
 
+            public void RenderMenuExit()
+            {
+                display.Write("X", Width - 3, 1, ConsoleColor.Red);
+                display.DrawResource("menuBorderVerticalLine", Width - 5, 0);
+            }
+
             public void ClearDisplay()
             {
                 StringBuilder sbClearline = new StringBuilder().Append('#', Width);

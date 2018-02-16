@@ -56,9 +56,9 @@
     <Compile Include="Items\WeaponType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Displays\Display.cs" />
+    <Compile Include="Rendering\Displays\DisplayInventory.cs" />
     <Compile Include="Rendering\Displays\DisplayPrefabs.cs" />
     <Compile Include="Rendering\Displays\DisplaySplash.cs" />
-    <Compile Include="Rendering\Menus\Menu.cs" />
     <Compile Include="Rendering\Pxl.cs" />
     <Compile Include="Rendering\ResourceProvider.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -76,6 +76,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Resources\menuBorder" />
+    <None Include="Resources\menuBorderVerticalLine" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

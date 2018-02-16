@@ -40,7 +40,7 @@ namespace GameLib.GameCore
 
         private void RunGame()
         {
-            currentDisplay = new DisplaySplash();
+            currentDisplay = new DisplaySplash(null);
             while(currentDisplay != null)
             {
                 OnDisplayUpdate.Invoke(currentDisplay.Render());

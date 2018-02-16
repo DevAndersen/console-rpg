@@ -10,6 +10,11 @@ namespace GameLib.Rendering.Displays
     {
         bool initial = true;
 
+        public DisplaySplash(Display previousDisplay) : base(previousDisplay)
+        {
+
+        }
+
         public override Display Run()
         {
             if(initial)
@@ -17,7 +22,15 @@ namespace GameLib.Rendering.Displays
                 initial = false;
                 return this;
             }
-            return null;
+            switch(ReadKey())
+            {
+                case ConsoleKey.Enter:
+                    return new DisplayInventory(this, null);
+                case ConsoleKey.X:
+                    return null;
+                default:
+                    return this;
+            }
         }
 
         protected override void RenderDisplay()

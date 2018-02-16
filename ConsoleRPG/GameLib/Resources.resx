@@ -121,4 +121,7 @@
   <data name="menuBorder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\menuBorder;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="menuBorderVerticalLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\menuBorderVerticalLine;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

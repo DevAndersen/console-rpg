@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Items
 {
+    [Serializable]
     public class ItemStack
     {
         public Item Item { get; set; }

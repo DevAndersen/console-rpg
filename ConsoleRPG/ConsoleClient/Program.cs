@@ -23,7 +23,6 @@ namespace GameConsole
             Console.ReadLine();
             Console.WriteLine("GAME OVER");
             Console.ReadLine();
-            DisplaySplash d = new DisplaySplash();
         }
 
         public void StartGame()

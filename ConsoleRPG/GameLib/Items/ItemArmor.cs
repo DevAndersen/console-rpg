@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Items
 {
+    [Serializable]
     public class ItemArmor : Item
     {
         public ArmorType Type { get; }

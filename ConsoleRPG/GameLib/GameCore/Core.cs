@@ -10,6 +10,8 @@ namespace GameLib.GameCore
 {
     public class Core
     {
+        public static string GameName { get { return "ConsoleRPG"; } }
+
         public static Core instance;
 
         public delegate void DisplayUpdate(Pxl[,] grid);

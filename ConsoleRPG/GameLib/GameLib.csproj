@@ -44,12 +44,12 @@
     <Compile Include="GameCore\Core.cs" />
     <Compile Include="GameCore\IGameHandler.cs" />
     <Compile Include="GameCore\Logger.cs" />
+    <Compile Include="GameCore\Serializer.cs" />
     <Compile Include="Items\ArmorMaterial.cs" />
     <Compile Include="Items\ArmorType.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemArmor.cs" />
-    <Compile Include="Items\ItemsList.cs" />
     <Compile Include="Items\ItemStack.cs" />
     <Compile Include="Items\ItemWeapon.cs" />
     <Compile Include="Items\WeaponMaterial.cs" />

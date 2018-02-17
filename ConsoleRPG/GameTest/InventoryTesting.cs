@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameLib.GameCore;
 using GameLib.Items;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -102,6 +103,37 @@ namespace GameTest
 
             bool addOneUnstackableItemTooMany = inv.AddItemStack(new ItemStack(testItemNonStackable));
             Assert.AreEqual(false, addOneUnstackableItemTooMany);
+        }
+
+        [TestMethod]
+        public void Inventory_Success_Swap()
+        {
+            Inventory inv = new Inventory("", inventorySize);
+
+            Assert.AreEqual(null, inv.GetSlot(0));
+            Assert.AreEqual(null, inv.GetSlot(1));
+            Assert.AreEqual(null, inv.GetSlot(2));
+            Assert.AreEqual(null, inv.GetSlot(3));
+            Assert.AreEqual(null, inv.GetSlot(4));
+
+            ItemStack stack = new ItemStack(testItemNonStackable);
+            inv.AddItemStack(stack);
+
+            Assert.AreNotEqual(null, inv.GetSlot(0));
+            Assert.AreEqual(null, inv.GetSlot(1));
+            Assert.AreEqual(null, inv.GetSlot(2));
+            Assert.AreEqual(null, inv.GetSlot(3));
+            Assert.AreEqual(null, inv.GetSlot(4));
+
+            inv.SwapSlots(0, 3);
+            Assert.AreEqual(stack, inv.GetSlot(3));
+
+            Assert.AreEqual(null, inv.GetSlot(0));
+            Assert.AreEqual(null, inv.GetSlot(1));
+            Assert.AreNotEqual(null, inv.GetSlot(3));
+            Assert.AreEqual(null, inv.GetSlot(2));
+            Assert.AreEqual(null, inv.GetSlot(4));
+
         }
     }
 }

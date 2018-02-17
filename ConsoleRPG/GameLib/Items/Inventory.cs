@@ -164,6 +164,11 @@ namespace GameLib.Items
             }
         }
 
+        public void ClearSlot(int slot)
+        {
+            items[slot] = null;
+        }
+
         public void RemoveAllItems()
         {
             Array.Clear(items, 0, Size);

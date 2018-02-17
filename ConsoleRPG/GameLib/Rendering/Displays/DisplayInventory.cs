@@ -14,6 +14,10 @@ namespace GameLib.Rendering.Displays
         int offset = 0;
         int slotsToRender = (int)Math.Ceiling(((double)Height - 6) / 2);
 
+        InventoryMode inventoryMode = InventoryMode.None;
+        int swapSlot;
+        int destroySlot;
+
         public DisplayInventory(Display previousDisplay, Inventory inventory) : base(previousDisplay)
         {
             this.inventory = inventory;
@@ -31,7 +35,15 @@ namespace GameLib.Rendering.Displays
             ConsoleKey read = ReadKey();
             if(read == ConsoleKey.X)
             {
-                return previousDisplay;
+                if(inventoryMode != InventoryMode.None)
+                {
+                    inventoryMode = InventoryMode.None;
+                    return this;
+                }
+                else
+                {
+                    return previousDisplay;
+                }
             }
             else if (read == ConsoleKey.UpArrow)
             {
@@ -57,6 +69,32 @@ namespace GameLib.Rendering.Displays
                 }
                 return this;
             }
+            else if (read == ConsoleKey.S && inventoryMode == InventoryMode.None)
+            {
+                inventoryMode = InventoryMode.Swap;
+                swapSlot = slot;
+                return this;
+            }
+            else if (read == ConsoleKey.D && inventoryMode == InventoryMode.None && inventory.GetSlot(slot) != null)
+            {
+                inventoryMode = InventoryMode.Destroy;
+                destroySlot = slot;
+                return this;
+            }
+            else if (read == ConsoleKey.Enter)
+            {
+                if (inventoryMode == InventoryMode.Swap)
+                {
+                    inventory.SwapSlots(swapSlot, slot);
+                    inventoryMode = InventoryMode.None;
+                }
+                else if (inventoryMode == InventoryMode.Destroy)
+                {
+                    inventory.ClearSlot(destroySlot);
+                    inventoryMode = InventoryMode.None;
+                }
+                return this;
+            }
             else
             {
                 return this;
@@ -66,7 +104,6 @@ namespace GameLib.Rendering.Displays
         protected override void RenderDisplay()
         {
             prefabs.RenderMenuBorder(inventory.Name);
-            prefabs.RenderMenuExit();
             for (int slotIndex = 0 - offset; slotIndex < -offset + slotsToRender; slotIndex++)
             {
                 string slotString = $"Empty [Slot {(slotIndex + 1)}]";
@@ -82,7 +119,94 @@ namespace GameLib.Rendering.Displays
                 Write(slotString, posX, posY, slotColor);
                 DrawResource("menuBorderHorizontalLine", 0, Height - 3);
             }
+
+            if(inventoryMode == InventoryMode.None)
+            {
+                RenderModeNone();
+            }
+            else if (inventoryMode == InventoryMode.Swap)
+            {
+                RenderModeSwap();
+            }
+            else if (inventoryMode == InventoryMode.Destroy)
+            {
+                RenderModeDestroy();
+            }
+
             Write(">", 1, 3 + ((slot + offset) * 2));
+        }
+
+        private void RenderModeNone()
+        {
+            prefabs.RenderMenuExit();
+
+            Write("Swap slots", 2, Height - 2, ConsoleColor.DarkGreen);
+            Write("S", 2, Height - 2, ConsoleColor.Green);
+            DrawResource("menuBorderVerticalLine", 13, Height - 3);
+
+            Write("Destroy item", 15, Height - 2, ConsoleColor.DarkRed);
+            Write("D", 15, Height - 2, ConsoleColor.Red);
+            DrawResource("menuBorderVerticalLine", 28, Height - 3);
+        }
+
+        private void RenderModeSwap()
+        {
+            if ((swapSlot + offset) < slotsToRender && (swapSlot + offset) >= 0)
+            {
+                Write(">", 1, 3 + ((swapSlot + offset) * 2), ConsoleColor.DarkGreen);
+            }
+
+            string slotString = "Empty";
+            if (inventory.GetSlot(swapSlot) != null)
+            {
+                slotString = inventory.GetSlot(swapSlot).ToString();
+            }
+            slotString = $"Swapping {slotString} [Slot {swapSlot + 1}]";
+            Write(slotString, 2, Height - 2, ConsoleColor.DarkGray);
+            int slotStringOffset = slotString.Length + 3;
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset, Height - 3);
+
+            Write("[Enter] Swap", slotStringOffset + 2, Height - 2, ConsoleColor.DarkGreen);
+            Write("Enter", slotStringOffset + 3, Height - 2, ConsoleColor.Green);
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset + 15, Height - 3);
+
+            Write("[X] Cancel", slotStringOffset + 17, Height - 2, ConsoleColor.DarkRed);
+            Write("X", slotStringOffset + 18, Height - 2, ConsoleColor.Red);
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset + 28, Height - 3);
+        }
+
+        private void RenderModeDestroy()
+        {
+            string slotString = "Empty";
+            if (inventory.GetSlot(destroySlot) != null)
+            {
+                slotString = inventory.GetSlot(destroySlot).ToString();
+            }
+            slotString = $"Destroy {slotString}?";
+            Write(slotString, 2, Height - 2, ConsoleColor.DarkGray);
+            int slotStringOffset = slotString.Length + 3;
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset, Height - 3);
+
+            Write("[Enter] Yes", slotStringOffset + 2, Height - 2, ConsoleColor.DarkRed);
+            Write("Enter", slotStringOffset + 3, Height - 2, ConsoleColor.Red);
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset + 14, Height - 3);
+
+            Write("[X] No", slotStringOffset + 16, Height - 2, ConsoleColor.DarkGreen);
+            Write("X", slotStringOffset + 17, Height - 2, ConsoleColor.Green);
+
+            DrawResource("menuBorderVerticalLine", slotStringOffset + 23, Height - 3);
+        }
+
+        private enum InventoryMode
+        {
+            None,
+            Swap,
+            Destroy
         }
     }
 }

@@ -44,10 +44,10 @@ namespace GameTest
             ItemStack itemstackZero = new ItemStack(testItemStackable, 0);
             ItemStack itemstackNegative = new ItemStack(testItemStackable, -1);
 
-            Assert.AreEqual(true, itemstackZero.Item == Item.Items.fallback);
+            Assert.AreEqual(true, itemstackZero.Item == ItemsList.fallback);
             Assert.AreEqual(1, itemstackZero.Amount);
 
-            Assert.AreEqual(true, itemstackNegative.Item == Item.Items.fallback);
+            Assert.AreEqual(true, itemstackNegative.Item == ItemsList.fallback);
             Assert.AreEqual(1, itemstackNegative.Amount);
         }
 
@@ -58,10 +58,10 @@ namespace GameTest
             ItemStack itemstackZero = new ItemStack(testItemNonStackable, 0);
             ItemStack itemstackNegative = new ItemStack(testItemNonStackable, -1);
 
-            Assert.AreEqual(true, itemstackZero.Item == Item.Items.fallback);
+            Assert.AreEqual(true, itemstackZero.Item == ItemsList.fallback);
             Assert.AreEqual(1, itemstackZero.Amount);
 
-            Assert.AreEqual(true, itemstackNegative.Item == Item.Items.fallback);
+            Assert.AreEqual(true, itemstackNegative.Item == ItemsList.fallback);
             Assert.AreEqual(1, itemstackNegative.Amount);
         }
     }

@@ -15,14 +15,14 @@ namespace GameLib.Items
 
         public ItemStack(Item item, int amount = 1)
         {
-            if ((item.Stackable && amount > 0) || (!item.Stackable && amount == 1))
+            if (item.Stackable && amount > 0 || !item.Stackable && amount == 1)
             {
                 Item = item;
                 Amount = amount;
             }
             else
             {
-                Item = Item.Items.fallback;
+                Item = ItemsList.fallback;
                 Amount = 1;
                 Logger.Log($"Failed at instantiating itemstack {item}x{amount}.", LoggingLevel.Critical);
             }

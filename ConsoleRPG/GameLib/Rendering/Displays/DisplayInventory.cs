@@ -21,8 +21,8 @@ namespace GameLib.Rendering.Displays
         public DisplayInventory(Display previousDisplay, Inventory inventory) : base(previousDisplay)
         {
             this.inventory = inventory;
-            inventory.AddItemStack(new ItemStack(ItemArmor.Items.daggerWood, 1));
-            inventory.AddItemStack(new ItemStack(ItemArmor.Items.itemOne, 4));
+            inventory.AddItemStack(new ItemStack(ItemsList.daggerWood, 1));
+            inventory.AddItemStack(new ItemStack(ItemsList.itemOne, 4));
         }
 
         public override Display Run()

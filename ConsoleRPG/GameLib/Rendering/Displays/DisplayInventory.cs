@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class DisplayInventory : Display
     {
         Inventory inventory;

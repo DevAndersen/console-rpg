@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameCore\Core.cs" />
+    <Compile Include="GameCore\Game.cs" />
     <Compile Include="GameCore\IGameHandler.cs" />
     <Compile Include="GameCore\Logger.cs" />
     <Compile Include="GameCore\Serializer.cs" />

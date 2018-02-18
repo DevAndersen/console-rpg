@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering
 {
+    [Serializable]
     public class Pxl
     {
         public char? Char { get; }

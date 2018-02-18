@@ -19,26 +19,28 @@ namespace GameLib.GameCore
             }
         }
 
-        public static void Serialize()
+        public static void SaveGame(Game game)
         {
             if (!Directory.Exists(AppDataFolder))
             {
                 Directory.CreateDirectory(AppDataFolder);
             }
             BinaryFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(AppDataFolder + "MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None))
+            using (Stream stream = new FileStream(AppDataFolder + "save.bin", FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                formatter.Serialize(stream, 1);
+                formatter.Serialize(stream, game);
             }
         }
 
-        public static void Deserialize()
+        public static Game LoadGame()
         {
+            Game game;
             BinaryFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(AppDataFolder + "MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (Stream stream = new FileStream(AppDataFolder + "save.bin", FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                int obj = (int)formatter.Deserialize(stream);
+                game = (Game)formatter.Deserialize(stream);
             }
+            return game;
         }
     }
 }

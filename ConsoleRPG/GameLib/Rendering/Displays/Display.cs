@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public abstract partial class Display
     {
         public static int Width { get { return 151; } }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class DisplaySplash : Display
     {
         bool initial = true;
@@ -22,15 +23,18 @@ namespace GameLib.Rendering.Displays
                 initial = false;
                 return this;
             }
-            switch(ReadKey())
+
+            ConsoleKey read = ReadKey();
+
+            if (read == ConsoleKey.Enter)
             {
-                case ConsoleKey.Enter:
-                    return new DisplayInventory(this, new Items.Inventory("Inventory", 30));
-                case ConsoleKey.X:
-                    return null;
-                default:
-                    return this;
+                return new DisplayInventory(this, new Items.Inventory("Inventory", 30));
             }
+            else if (read == ConsoleKey.X)
+            {
+                return null;
+            }
+            return this;
         }
 
         protected override void RenderDisplay()

@@ -31,7 +31,7 @@ namespace GameConsole
             grid = new Pxl[Display.Width, Display.Height];
             
             Core.StartGame(this);
-            if (Core.instance.DebugMode)
+            if (Core.instance.game.DebugMode)
             {
                 Logger.GetLog().ToList().ForEach(x => Console.WriteLine($"[{x.timestamp.ToString("hh:mm:ss")}] <{x.level}>\t{x.message}"));
             }

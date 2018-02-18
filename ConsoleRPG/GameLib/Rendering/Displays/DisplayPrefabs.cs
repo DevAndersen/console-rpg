@@ -10,6 +10,7 @@ namespace GameLib.Rendering.Displays
     {
         protected Prefabs prefabs;
 
+        [Serializable]
         protected class Prefabs
         {
             private Display display;

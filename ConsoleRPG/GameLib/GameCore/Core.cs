@@ -19,10 +19,7 @@ namespace GameLib.GameCore
 
         public IGameHandler gameHandler;
 
-        public bool DebugMode { get; set; } = true;
-
-        private Display currentDisplay;
-        private Display NextDisplay;
+        public Game game;
 
         public static void StartGame(IGameHandler gameHandler)
         {
@@ -33,6 +30,7 @@ namespace GameLib.GameCore
         private Core(IGameHandler gameHandler)
         {
             instance = this;
+            game = new Game();
             this.gameHandler = gameHandler;
 
             OnDisplayUpdate += this.gameHandler.OnDisplayUpdate;
@@ -40,12 +38,12 @@ namespace GameLib.GameCore
 
         private void RunGame()
         {
-            currentDisplay = new DisplaySplash(null);
-            while(currentDisplay != null)
+            game.currentDisplay = new DisplaySplash(null);
+            while(game.currentDisplay != null)
             {
-                OnDisplayUpdate.Invoke(currentDisplay.Render());
-                NextDisplay = currentDisplay.Run();
-                currentDisplay = NextDisplay;
+                OnDisplayUpdate.Invoke(game.currentDisplay.Render());
+                game.NextDisplay = game.currentDisplay.Run();
+                game.currentDisplay = game.NextDisplay;
             }
         }
 
@@ -62,6 +60,16 @@ namespace GameLib.GameCore
         public void WaitMs(int ms)
         {
             gameHandler.WaitMs(ms);
+        }
+
+        public void SaveGame()
+        {
+            Serializer.SaveGame(game);
+        }
+
+        public void LoadGame()
+        {
+            game = Serializer.LoadGame();
         }
     }
 }

@@ -69,7 +69,7 @@ namespace GameLib.Rendering.Displays
                 }
                 return this;
             }
-            else if (read == ConsoleKey.S && inventoryMode == InventoryMode.None)
+            else if (read == ConsoleKey.S && (inventoryMode == InventoryMode.None || inventoryMode == InventoryMode.Swap))
             {
                 inventoryMode = InventoryMode.Swap;
                 swapSlot = slot;
@@ -139,7 +139,7 @@ namespace GameLib.Rendering.Displays
         private void RenderModeNone()
         {
             prefabs.RenderMenuExit();
-
+            
             Write("Swap slots", 2, Height - 2, ConsoleColor.DarkGreen);
             Write("S", 2, Height - 2, ConsoleColor.Green);
             DrawResource("menuBorderVerticalLine", 13, Height - 3);

@@ -59,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Displays\Display.cs" />
     <Compile Include="Rendering\Displays\DisplayInventory.cs" />
+    <Compile Include="Rendering\Displays\DisplayMainMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPrefabs.cs" />
     <Compile Include="Rendering\Displays\DisplaySplash.cs" />
     <Compile Include="Rendering\Pxl.cs" />
@@ -77,10 +78,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\logo" />
     <None Include="Resources\menuBorder" />
     <None Include="Resources\menuBorderHorizontalLine" />
     <None Include="Resources\menuBorderVerticalLine" />
     <None Include="Resources\menuBorderVerticalLine39" />
+    <None Include="Resources\simpleBorder" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

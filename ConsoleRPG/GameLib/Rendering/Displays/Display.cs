@@ -93,14 +93,14 @@ namespace GameLib.Rendering.Displays
         /// <param name="foregroundColor"></param>
         /// <param name="backgroundColor"></param>
         /// <param name="waitMs"></param>
-        protected void DrawResource(string resourceKey, int? posX, int? posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
+        protected (int resourceX, int resourceY, int resourceWidth, int resourceHeight) DrawResource(string resourceKey, int? posX, int? posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             char[,] resource = ResourceProvider.GetResource(resourceKey);
 
             if (resource == null)
             {
                 Logger.Log($"Could not find resource '{resourceKey}' for display {GetType()}.", LoggingLevel.Error);
-                return;
+                return (posX ?? 0, posY ?? 0, 0, 0);
             }
 
             int resourceWidth = resource.GetLength(1);
@@ -111,7 +111,7 @@ namespace GameLib.Rendering.Displays
             if(realPosX < 0 || realPosY < 0 || realPosX + resourceWidth > Width || realPosY + resourceHeight > Height)
             {
                 Logger.Log($"Tried to draw resource '{resourceKey}' outside display for {GetType()}.", LoggingLevel.Error);
-                return;
+                return (posX ?? 0, posY ?? 0, 0, 0);
             }
 
             for (int x = 0; x < resourceWidth; x++)
@@ -124,6 +124,7 @@ namespace GameLib.Rendering.Displays
                     }
                 }
             }
+            return (realPosX, realPosY, resourceWidth, resourceHeight);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace GameLib.Rendering.Displays
         /// <param name="foregroundColor"></param>
         /// <param name="backgroundColor"></param>
         /// <param name="waitMs"></param>
-        protected void DrawResource(string resourceKey, int posX, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
+        protected void DrawResource(string resourceKey, int? posX, int? posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             char[,] resource = ResourceProvider.GetResource(resourceKey);
 
@@ -105,8 +105,10 @@ namespace GameLib.Rendering.Displays
 
             int resourceWidth = resource.GetLength(1);
             int resourceHeight = resource.GetLength(0);
+            int realPosX = posX ?? (Width / 2) - (resourceWidth / 2);
+            int realPosY = posY ?? (Height / 2) - (resourceHeight / 2);
 
-            if(posX < 0 || posY < 0 || posX + resourceWidth > Width || posY + resourceHeight > Height)
+            if(realPosX < 0 || realPosY < 0 || realPosX + resourceWidth > Width || realPosY + resourceHeight > Height)
             {
                 Logger.Log($"Tried to draw resource '{resourceKey}' outside display for {GetType()}.", LoggingLevel.Error);
                 return;
@@ -118,7 +120,7 @@ namespace GameLib.Rendering.Displays
                 {
                     if(resource[y, x] != '~')
                     {
-                        grid[posX + x, posY + y] = new Pxl(resource[y, x], foregroundColor, backgroundColor, waitMs);
+                        grid[realPosX + x, realPosY + y] = new Pxl(resource[y, x], foregroundColor, backgroundColor, waitMs);
                     }
                 }
             }

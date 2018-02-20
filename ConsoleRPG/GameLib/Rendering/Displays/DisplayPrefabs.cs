@@ -34,7 +34,7 @@ namespace GameLib.Rendering.Displays
 
             public void ClearDisplay()
             {
-                StringBuilder sbClearline = new StringBuilder().Append('#', Width);
+                StringBuilder sbClearline = new StringBuilder().Append(' ', Width);
                 for (int i = 0; i < Height; i++)
                 {
                     display.Write(sbClearline.ToString(), 0, i, ConsoleColor.Gray, ConsoleColor.Black);

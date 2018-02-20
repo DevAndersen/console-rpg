@@ -77,8 +77,7 @@ namespace GameLib.Rendering.Displays
                 {
                     text = $">>> {text} <<<";
                 }
-
-                WriteCentered(text, textOffset + i * 2);
+                Write(text, null, textOffset + i * 2);
             }
         }
     }

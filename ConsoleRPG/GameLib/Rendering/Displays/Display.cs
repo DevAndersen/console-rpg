@@ -65,23 +65,24 @@ namespace GameLib.Rendering.Displays
             Core.instance.WaitMs(ms);
         }
 
-        protected void Write(string text, int posX, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
+        protected void Write(string text, int? posX, int? posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
         {
             if (posX < 0 || posY < 0 || posX + text.Length > Width || posY >= Height)
             {
                 Logger.Log($"Tried to write string '{text}' outside display for {GetType()}.", LoggingLevel.Error);
                 return;
             }
+
+            int realPosX = posX ?? (Width / 2) - (text.Length / 2);
+            int realPosY = posY ?? (Height / 2);
+
             for (int i = 0; i < text.Length; i++)
             {
-                grid[posX + i, posY] = new Pxl(text[i], foregroundColor, backgroundColor, waitMs);
+                if (text[i] != '~')
+                {
+                    grid[realPosX + i, realPosY] = new Pxl(text[i], foregroundColor, backgroundColor, waitMs);
+                }
             }
-        }
-
-        protected void WriteCentered(string text, int posY, ConsoleColor? foregroundColor = null, ConsoleColor? backgroundColor = null, int waitMs = 0)
-        {
-            int x = Width / 2 - text.Length / 2;
-            Write(text, x, posY, foregroundColor, backgroundColor, waitMs);
         }
 
         /// <summary>

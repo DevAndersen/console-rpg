@@ -23,7 +23,7 @@ namespace GameLib.Rendering.Displays
             public void RenderMenuBorder(string text)
             {
                 display.DrawResource("menuBorder", 0, 0, ConsoleColor.Gray);
-                display.WriteCentered(text, 1);
+                display.Write(text, null, 1);
             }
 
             public void RenderMenuExit()

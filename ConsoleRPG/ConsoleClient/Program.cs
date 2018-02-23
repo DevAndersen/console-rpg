@@ -20,8 +20,6 @@ namespace GameConsole
         {
             Console.OutputEncoding = Encoding.UTF8;
             new Program().StartGame();
-            Console.WriteLine("GAME OVER");
-            Console.ReadLine();
         }
 
         public void StartGame()
@@ -31,10 +29,6 @@ namespace GameConsole
             grid = new Pxl[Display.Width, Display.Height];
             
             Core.StartGame(this);
-            if (Core.instance.game.DebugMode)
-            {
-                Logger.GetLog().ToList().ForEach(x => Console.WriteLine($"[{x.timestamp.ToString("hh:mm:ss")}] <{x.level}>\t{x.message}"));
-            }
         }
 
         private void Render(Pxl[,] newGrid)

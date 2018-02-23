@@ -8,53 +8,33 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
-    public class DisplayMainMenu : Display
+    public class DisplayMainMenu : DisplayListMenu
     {
-        List<(string text, Display display)> options = new List<(string text, Display)>();
-        int selectedId = 0;
+        private ListOption optionNewGame = new ListOption("New game");
+        private ListOption optionLoadGame = new ListOption("Load game");
+        private ListOption optionExit = new ListOption("Exit");
 
         public DisplayMainMenu(Display previousDisplay) : base(previousDisplay)
         {
-            options.Add(("New game", new DisplayInventory(this, new Inventory("Inventory", 30))));
-            options.Add(("Load game", this));
-            options.Add(("Exit", null));
+            options.Add(optionNewGame);
+            options.Add(optionLoadGame);
+            options.Add(optionExit);
         }
 
-        public override Display Run()
+        protected override Display OnItemSelect(ListOption id)
         {
-            ConsoleKey read = ReadKey();
-            
-            if(read == ConsoleKey.UpArrow)
+            if (id == optionNewGame)
             {
-                if(selectedId == 0)
-                {
-                    selectedId = options.Count - 1;
-                }
-                else
-                {
-                    selectedId--;
-                }
-                return this;
+                return new DisplayPauseMenu(this);
             }
-            else if(read == ConsoleKey.DownArrow)
+            else if (id == optionLoadGame)
             {
-                if (selectedId == options.Count - 1)
-                {
-                    selectedId = 0;
-                }
-                else
-                {
-                    selectedId++;
-                }
-                return this;
+                Core.instance.LoadGame();
+                return Core.instance.game.currentDisplay;
             }
-            else if(read == ConsoleKey.Enter)
+            else if (id == optionExit)
             {
-                if (options[selectedId].display == this)
-                {
-                    Core.instance.LoadGame();
-                }
-                return options[selectedId].display;
+                return null;
             }
             else
             {
@@ -62,20 +42,25 @@ namespace GameLib.Rendering.Displays
             }
         }
 
+        public override Display HandleAlternativeInput(ConsoleKey read)
+        {
+            return this;
+        }
+
         protected override void RenderDisplay()
         {
             DrawResource("simpleBorder", 0, 0);
             (int resourceX, int resourceY, int resourceWidth, int resourceHeight) logo = DrawResource("logo", null, 2);
 
-            var textOffset = logo.resourceY + logo.resourceHeight + 5;
+            int textOffset = logo.resourceY + logo.resourceHeight + 5;
 
             for (int i = 0; i < options.Count; i++)
             {
-                (string text, Display display) = options[i];
-
-                if (selectedId == i)
+                ListOption option = options[i];
+                string text = option.Text;
+                if (selectedOptionId == i)
                 {
-                    text = $">>> {text} <<<";
+                    text = $">>> {option.Text} <<<";
                 }
                 Write(text, null, textOffset + i * 2);
             }

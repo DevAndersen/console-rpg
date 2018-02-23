@@ -30,7 +30,7 @@ namespace GameLib.Items
 
         public override string ToString()
         {
-            if(Item.Stackable)
+            if (Item.Stackable)
             {
                 return $"{Amount} x {Item.Name}";
             }

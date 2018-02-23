@@ -48,7 +48,7 @@ namespace GameLib.Rendering.Displays
         protected int? ReadKeyAsDigit()
         {
             ConsoleKeyInfo key = ReadKeyInfo();
-            if(char.IsDigit(key.KeyChar))
+            if (char.IsDigit(key.KeyChar))
             {
                 return (int)Char.GetNumericValue(key.KeyChar);
             }
@@ -109,7 +109,7 @@ namespace GameLib.Rendering.Displays
             int realPosX = posX ?? (Width / 2) - (resourceWidth / 2);
             int realPosY = posY ?? (Height / 2) - (resourceHeight / 2);
 
-            if(realPosX < 0 || realPosY < 0 || realPosX + resourceWidth > Width || realPosY + resourceHeight > Height)
+            if (realPosX < 0 || realPosY < 0 || realPosX + resourceWidth > Width || realPosY + resourceHeight > Height)
             {
                 Logger.Log($"Tried to draw resource '{resourceKey}' outside display for {GetType()}.", LoggingLevel.Error);
                 return (posX ?? 0, posY ?? 0, 0, 0);

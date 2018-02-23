@@ -48,7 +48,7 @@ namespace GameConsole
                     {
                         grid[x, y] = pxl;
 
-                        if(Console.ForegroundColor != ConsoleColor.Gray)
+                        if (Console.ForegroundColor != ConsoleColor.Gray)
                         {
                             Console.ForegroundColor = ConsoleColor.Gray;
                         }

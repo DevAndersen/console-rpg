@@ -17,7 +17,6 @@ namespace GameLib.Rendering.Displays
         public override Display Run()
         {
             ConsoleKey read = ReadKey();
-            
             if (read == ConsoleKey.X)
             {
                 return previousDisplay;
@@ -39,31 +38,29 @@ namespace GameLib.Rendering.Displays
             {
                 (string message, LoggingLevel level, DateTime timestamp) = logEntries[i];
 
-                ConsoleColor color = ConsoleColor.Gray;
-
-                if(level == LoggingLevel.Debug)
-                {
-                    color = ConsoleColor.Green;
-                }
-                else if (level == LoggingLevel.Critical)
-                {
-                    color = ConsoleColor.Red;
-                }
-                else if (level == LoggingLevel.Warning)
-                {
-                    color = ConsoleColor.Yellow;
-                }
-                else if (level >= LoggingLevel.Warning)
-                {
-                    color = ConsoleColor.DarkRed;
-                }
-
-                Write($"[{timestamp.ToString("hh:mm:ss")}] <{level}>\t{message}", 1, 3 + i, color);
+                Write($"[{timestamp.ToString("hh:mm:ss")}] <{level}>\t{message}", 1, 3 + i, GetErrorColor(level));
             }
 
             if (logEntries.Length == 0)
             {
                 Write("Log empty.", 1, 3, ConsoleColor.DarkGray);
+            }
+        }
+
+        private ConsoleColor GetErrorColor(LoggingLevel level)
+        {
+            switch (level)
+            {
+                case LoggingLevel.Debug:
+                    return ConsoleColor.Green;
+                case LoggingLevel.Warning:
+                    return ConsoleColor.Yellow;
+                case LoggingLevel.Critical:
+                    return ConsoleColor.Red;
+                case LoggingLevel lvl when lvl >= LoggingLevel.Warning:
+                    return ConsoleColor.DarkRed;
+                default:
+                    return ConsoleColor.Gray;
             }
         }
     }

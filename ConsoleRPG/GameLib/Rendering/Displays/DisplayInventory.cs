@@ -28,15 +28,15 @@ namespace GameLib.Rendering.Displays
 
         public override Display Run()
         {
-            if(inventory == null)
+            if (inventory == null)
             {
                 return previousDisplay;
             }
 
             ConsoleKey read = ReadKey();
-            if(read == ConsoleKey.X)
+            if (read == ConsoleKey.X)
             {
-                if(inventoryMode != InventoryMode.None)
+                if (inventoryMode != InventoryMode.None)
                 {
                     inventoryMode = InventoryMode.None;
                     return this;

@@ -39,7 +39,7 @@ namespace GameLib.GameCore
         private void RunGame()
         {
             game.currentDisplay = new DisplaySplash(null);
-            while(game.currentDisplay != null)
+            while (game.currentDisplay != null)
             {
                 OnDisplayUpdate.Invoke(game.currentDisplay.Render());
                 game.NextDisplay = game.currentDisplay.Run();

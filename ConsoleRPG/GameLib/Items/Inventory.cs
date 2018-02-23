@@ -17,7 +17,7 @@ namespace GameLib.Items
         public Inventory(string name, int size)
         {
             Name = name;
-            if(size <= 0)
+            if (size <= 0)
             {
                 Logger.Log($"Attempted to instantiate inventory of size {size}.", LoggingLevel.Error);
                 size = 1;
@@ -37,7 +37,7 @@ namespace GameLib.Items
 
         public bool AddItemStack(ItemStack itemstack)
         {
-            if(itemstack.Item.Stackable)
+            if (itemstack.Item.Stackable)
             {
                 int amount = itemstack.Amount;
                 long countFreeSpaceInSimilarStacks = 0;
@@ -49,7 +49,7 @@ namespace GameLib.Items
                 bool hasSlotsThatCanBeFilled = countFreeSpaceInSimilarStacks > 0 && itemstack.Amount < countFreeSpaceInSimilarStacks;
                 bool hasEmptySlots = items.Count(x => x == null) != 0;
 
-                if(!hasSlotsThatCanBeFilled && !hasEmptySlots)
+                if (!hasSlotsThatCanBeFilled && !hasEmptySlots)
                 {
                     return false; //Not enough space for itemstack, return false
                 }
@@ -133,12 +133,12 @@ namespace GameLib.Items
                 if (items[slot].Item == item)
                 {
                     ItemStack stack = items[slot];
-                    if(amount < stack.Amount)
+                    if (amount < stack.Amount)
                     {
                         stack.Amount -= amount;
                         return true;
                     }
-                    else if(amount == stack.Amount)
+                    else if (amount == stack.Amount)
                     {
                         items[slot] = null;
                         return true;

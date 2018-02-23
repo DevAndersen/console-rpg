@@ -21,7 +21,7 @@ namespace GameLib.Items
         {
             Name = name;
             Stackable = stackable;
-            if(price != untradablePrice && price < 1)
+            if (price != untradablePrice && price < 1)
             {
                 Logger.Log($"Item '{Name}' had unacceptable price {price}. Defaults to {untradablePrice}, untradable.", LoggingLevel.Error);
                 price = untradablePrice;

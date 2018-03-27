@@ -41,13 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\Effect.cs" />
+    <Compile Include="Effects\EffectRestoration.cs" />
+    <Compile Include="Effects\EffectPoison.cs" />
+    <Compile Include="Effects\EffectsList.cs" />
+    <Compile Include="Effects\EffectType.cs" />
     <Compile Include="GameCore\Core.cs" />
     <Compile Include="GameCore\Game.cs" />
     <Compile Include="GameCore\IGameHandler.cs" />
     <Compile Include="GameCore\Logger.cs" />
+    <Compile Include="GameCore\Player.cs" />
     <Compile Include="GameCore\Serializer.cs" />
     <Compile Include="Items\ArmorMaterial.cs" />
     <Compile Include="Items\ArmorType.cs" />
+    <Compile Include="Items\Consumables\Foods\EdibleType.cs" />
+    <Compile Include="Items\Consumables\ItemConsumableBase.cs" />
+    <Compile Include="Items\Consumables\Foods\ItemEdible.cs" />
+    <Compile Include="Items\Consumables\ItemPotion.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="Items\ItemArmor.cs" />
@@ -56,6 +66,9 @@
     <Compile Include="Items\ItemWeapon.cs" />
     <Compile Include="Items\WeaponMaterial.cs" />
     <Compile Include="Items\WeaponType.cs" />
+    <Compile Include="Mob\MobAttackable.cs" />
+    <Compile Include="Mob\MobBase.cs" />
+    <Compile Include="Mob\MobPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Displays\Display.cs" />
     <Compile Include="Rendering\Displays\DisplayDebugLog.cs" />

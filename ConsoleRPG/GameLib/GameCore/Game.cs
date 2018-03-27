@@ -11,8 +11,13 @@ namespace GameLib.GameCore
     public class Game
     {
         public bool DebugMode { get; set; } = true;
-
+        public Player player;
         public Display currentDisplay;
         public Display NextDisplay;
+
+        public Game()
+        {
+            player = new Player("Test Name");
+        }
     }
 }

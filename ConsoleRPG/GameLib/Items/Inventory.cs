@@ -58,7 +58,7 @@ namespace GameLib.Items
                 {
                     for (int slot = 0; slot < Size; slot++)
                     {
-                        if (items[slot].Item == itemstack.Item)
+                        if (items[slot]?.Item == itemstack.Item)
                         {
                             int freeSpace = int.MaxValue - items[slot].Amount;
                             if(freeSpace >= amount)

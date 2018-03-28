@@ -146,14 +146,11 @@ namespace GameLib.Rendering.Displays
         private void RenderModeNone()
         {
             prefabs.RenderMenuExit();
-            
-            Write("Swap slots", 2, Height - 2, ConsoleColor.DarkGreen);
-            Write("S", 2, Height - 2, ConsoleColor.Green);
-            DrawResource("menuBorderVerticalLine", 13, Height - 3);
-
-            Write("Destroy item", 15, Height - 2, ConsoleColor.DarkRed);
-            Write("D", 15, Height - 2, ConsoleColor.Red);
-            DrawResource("menuBorderVerticalLine", 28, Height - 3);
+            prefabs.RenderMenuBar(new MenuBarItem[]
+            {
+                new MenuBarItem(ConsoleKey.S, "Swap slots", ConsoleColor.Green),
+                new MenuBarItem(ConsoleKey.D, "Destroy item", ConsoleColor.Red),
+            });
         }
 
         private void RenderModeSwap()
@@ -169,20 +166,13 @@ namespace GameLib.Rendering.Displays
                 slotString = inventory.GetSlot(swapSlot).ToString();
             }
             slotString = $"Swapping {slotString} [Slot {swapSlot + 1}]";
-            Write(slotString, 2, Height - 2, ConsoleColor.DarkGray);
-            int slotStringOffset = slotString.Length + 3;
 
-            DrawResource("menuBorderVerticalLine", slotStringOffset, Height - 3);
-
-            Write("[Enter] Swap", slotStringOffset + 2, Height - 2, ConsoleColor.DarkGreen);
-            Write("Enter", slotStringOffset + 3, Height - 2, ConsoleColor.Green);
-
-            DrawResource("menuBorderVerticalLine", slotStringOffset + 15, Height - 3);
-
-            Write("[X] Cancel", slotStringOffset + 17, Height - 2, ConsoleColor.DarkRed);
-            Write("X", slotStringOffset + 18, Height - 2, ConsoleColor.Red);
-
-            DrawResource("menuBorderVerticalLine", slotStringOffset + 28, Height - 3);
+            prefabs.RenderMenuBar(new MenuBarItem[]
+            {
+                new MenuBarItem(slotString),
+                new MenuBarItem(ConsoleKey.Enter, "Swap slots", ConsoleColor.Green),
+                new MenuBarItem(ConsoleKey.X, "Cancel", ConsoleColor.Red),
+            });
         }
 
         private void RenderModeDestroy()
@@ -193,20 +183,13 @@ namespace GameLib.Rendering.Displays
                 slotString = inventory.GetSlot(destroySlot).ToString();
             }
             slotString = $"Destroy {slotString}?";
-            Write(slotString, 2, Height - 2, ConsoleColor.DarkGray);
-            int slotStringOffset = slotString.Length + 3;
 
-            DrawResource("menuBorderVerticalLine", slotStringOffset, Height - 3);
-
-            Write("[Enter] Yes", slotStringOffset + 2, Height - 2, ConsoleColor.DarkRed);
-            Write("Enter", slotStringOffset + 3, Height - 2, ConsoleColor.Red);
-
-            DrawResource("menuBorderVerticalLine", slotStringOffset + 14, Height - 3);
-
-            Write("[X] No", slotStringOffset + 16, Height - 2, ConsoleColor.DarkGreen);
-            Write("X", slotStringOffset + 17, Height - 2, ConsoleColor.Green);
-
-            DrawResource("menuBorderVerticalLine", slotStringOffset + 23, Height - 3);
+            prefabs.RenderMenuBar(new MenuBarItem[]
+            {
+                new MenuBarItem(slotString),
+                new MenuBarItem(ConsoleKey.Enter, "Yes", ConsoleColor.Green),
+                new MenuBarItem(ConsoleKey.X, "No", ConsoleColor.Red),
+            });
         }
 
         private enum InventoryMode

@@ -12,6 +12,7 @@ namespace GameLib.Effects
     {
         public EffectRestoration(string name, EffectType effectType, int rounds, int strength) : base(name, effectType, rounds, strength)
         {
+
         }
 
         public override void ActivateEffect(MobAttackable mob)

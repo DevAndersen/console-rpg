@@ -119,5 +119,15 @@ namespace GameLib {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] simpleBorderBottomBar {
+            get {
+                object obj = ResourceManager.GetObject("simpleBorderBottomBar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

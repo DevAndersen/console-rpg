@@ -20,6 +20,11 @@ namespace GameLib.Rendering.Displays
                 this.display = display;
             }
 
+            public void RenderBorderBottomBar()
+            {
+                display.DrawResource("simpleBorderBottomBar", 0, 0, ConsoleColor.Gray);
+            }
+
             public void RenderMenuBorder(string text)
             {
                 display.DrawResource("menuBorder", 0, 0, ConsoleColor.Gray);

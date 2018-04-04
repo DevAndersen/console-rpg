@@ -77,6 +77,7 @@
     <Compile Include="Rendering\Displays\DisplayMainMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPauseMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPrefabs.cs" />
+    <Compile Include="Rendering\Displays\DisplayRoom.cs" />
     <Compile Include="Rendering\Displays\DisplaySplash.cs" />
     <Compile Include="Rendering\Displays\MenuBarItem.cs" />
     <Compile Include="Rendering\Pxl.cs" />
@@ -86,6 +87,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rooms\Room.cs" />
+    <Compile Include="Rooms\Tile.cs" />
+    <Compile Include="Rooms\TilesList.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -101,6 +105,7 @@
     <None Include="Resources\menuBorderVerticalLine" />
     <None Include="Resources\menuBorderVerticalLine39" />
     <None Include="Resources\simpleBorder" />
+    <None Include="Resources\simpleBorderBottomBar" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

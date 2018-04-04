@@ -25,7 +25,7 @@ namespace GameLib.Rendering.Displays
         {
             if (id == optionNewGame)
             {
-                return new DisplayPauseMenu(this);
+                return new DisplayRoom(this);
             }
             else if (id == optionLoadGame)
             {

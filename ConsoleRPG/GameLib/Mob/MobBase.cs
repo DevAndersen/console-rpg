@@ -9,6 +9,7 @@ namespace GameLib.Mob
     [Serializable]
     public abstract class MobBase
     {
-
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }

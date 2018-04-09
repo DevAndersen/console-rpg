@@ -66,9 +66,9 @@
     <Compile Include="Items\ItemWeapon.cs" />
     <Compile Include="Items\WeaponMaterial.cs" />
     <Compile Include="Items\WeaponType.cs" />
-    <Compile Include="Mob\MobAttackable.cs" />
-    <Compile Include="Mob\MobBase.cs" />
-    <Compile Include="Mob\MobPlayer.cs" />
+    <Compile Include="Mobs\MobAttackable.cs" />
+    <Compile Include="Mobs\Mob.cs" />
+    <Compile Include="Mobs\MobPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Displays\Display.cs" />
     <Compile Include="Rendering\Displays\DisplayDebugLog.cs" />

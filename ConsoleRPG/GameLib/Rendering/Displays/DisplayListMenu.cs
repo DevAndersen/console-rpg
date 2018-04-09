@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public abstract class DisplayListMenu : Display
     {
         protected List<ListOption> options = new List<ListOption>();

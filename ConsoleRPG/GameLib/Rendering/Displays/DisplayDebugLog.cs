@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class DisplayDebugLog : Display
     {
         public DisplayDebugLog(Display previousDisplay) : base(previousDisplay)

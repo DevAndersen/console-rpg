@@ -1,5 +1,5 @@
 ﻿using GameLib.Effects;
-using GameLib.Mob;
+using GameLib.Mobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

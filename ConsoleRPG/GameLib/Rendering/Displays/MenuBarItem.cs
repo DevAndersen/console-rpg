@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class MenuBarItem
     {
         public ConsoleKey? Key { get; }

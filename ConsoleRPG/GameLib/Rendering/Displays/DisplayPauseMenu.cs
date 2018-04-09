@@ -33,7 +33,7 @@ namespace GameLib.Rendering.Displays
         {
             if (id == optionResumeGame)
             {
-                return new DisplayInventory(this, Core.instance.game.player.inventory);
+                return previousDisplay;
             }
             else if (id == optionLog)
             {

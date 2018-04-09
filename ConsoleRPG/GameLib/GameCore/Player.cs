@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.GameCore
 {
+    [Serializable]
     public class Player
     {
         public string Name { get; }

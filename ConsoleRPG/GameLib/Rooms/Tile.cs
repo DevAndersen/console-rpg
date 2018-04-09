@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rooms
 {
+    [Serializable]
     public class Tile
     {
         public ConsoleColor Color { get; }

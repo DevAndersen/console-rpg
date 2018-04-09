@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLib.Mob
+namespace GameLib.Mobs
 {
     [Serializable]
-    public abstract class MobAttackable : MobBase
+    public abstract class MobAttackable : Mob
     {
         public int Health { get; set; }
         public bool Alive
@@ -30,7 +30,7 @@ namespace GameLib.Mob
 
         private int maxHealth;
 
-        public MobAttackable(int health)
+        public MobAttackable(int x, int y, int health) : base(x, y)
         {
             maxHealth = health;
             Health = health;

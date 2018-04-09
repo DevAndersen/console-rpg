@@ -1,4 +1,5 @@
-﻿using GameLib.Rooms;
+﻿using GameLib.Mobs;
+using GameLib.Rooms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace GameLib.Rendering.Displays
 
         public DisplayRoom(Display previousDisplay) : base(previousDisplay)
         {
-
+            room = new Room(1000);
         }
 
         public override Display Run()
@@ -27,6 +28,13 @@ namespace GameLib.Rendering.Displays
             else if (read == ConsoleKey.Escape)
             {
                 return new DisplayPauseMenu(this);
+            }
+            else if (read == ConsoleKey.W || read == ConsoleKey.A || read == ConsoleKey.S || read == ConsoleKey.D)
+            {
+                MobPlayer player = room.GetPlayer();
+                int x = (read == ConsoleKey.A ? -1 : (read == ConsoleKey.D ? 1 : 0));
+                int y = (read == ConsoleKey.W ? -1 : (read == ConsoleKey.S ? 1 : 0));
+                bool result = room.MoveMobRelative(player, x, y);
             }
             return this;
         }
@@ -41,6 +49,23 @@ namespace GameLib.Rendering.Displays
                 new MenuBarItem(ConsoleKey.E, "Character menu", ConsoleColor.Green),
                 new MenuBarItem(ConsoleKey.Escape, "Pause menu", ConsoleColor.Yellow)
             });
+
+            //(char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[,] roomGrid = new (char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[Width, Height];
+
+            for (int x = 0; x < room.Width; x++)
+            {
+                for (int y = 0; y < room.Height; y++)
+                {
+                    Tile tile = room.GetTile(x, y);
+                    Mob mob = room.GetMobForPos(x, y);
+
+                    string character = mob == null ? " " : mob.Character.ToString();
+                    ConsoleColor foregroundColor = mob == null ? ConsoleColor.White : mob.Color;
+                    ConsoleColor backgroundColor = tile.Color;
+
+                    Write(character, x + 1, y + 1, foregroundColor, backgroundColor);
+                }
+            }
         }
     }
 }

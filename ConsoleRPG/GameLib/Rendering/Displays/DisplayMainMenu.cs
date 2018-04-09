@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class DisplayMainMenu : DisplayListMenu
     {
         private ListOption optionNewGame = new ListOption("New game");

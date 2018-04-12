@@ -55,7 +55,7 @@
     <Compile Include="Items\ArmorMaterial.cs" />
     <Compile Include="Items\ArmorType.cs" />
     <Compile Include="Items\Consumables\Foods\EdibleType.cs" />
-    <Compile Include="Items\Consumables\ItemConsumableBase.cs" />
+    <Compile Include="Items\Consumables\ItemConsumable.cs" />
     <Compile Include="Items\Consumables\Foods\ItemEdible.cs" />
     <Compile Include="Items\Consumables\ItemPotion.cs" />
     <Compile Include="Items\Inventory.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Rendering\Displays\DisplayPrefabs.cs" />
     <Compile Include="Rendering\Displays\DisplayRoom.cs" />
     <Compile Include="Rendering\Displays\DisplaySplash.cs" />
+    <Compile Include="Rendering\Displays\DisplayTextInput.cs" />
     <Compile Include="Rendering\Displays\MenuBarItem.cs" />
     <Compile Include="Rendering\Pxl.cs" />
     <Compile Include="Rendering\ResourceProvider.cs" />
@@ -99,6 +100,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\inputFieldLeft" />
+    <None Include="Resources\inputFieldMiddle" />
+    <None Include="Resources\inputFieldRight" />
     <None Include="Resources\logo" />
     <None Include="Resources\menuBorder" />
     <None Include="Resources\menuBorderHorizontalLine" />

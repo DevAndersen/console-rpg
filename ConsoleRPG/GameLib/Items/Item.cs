@@ -15,7 +15,7 @@ namespace GameLib.Items
         public virtual string Name { get; }
         public bool Stackable { get; set; }
         public int Price { get; }
-        public bool Tradable { get { return Price != untradablePrice; } }
+        public bool Tradable { get => Price != untradablePrice; }
 
         public Item(string name, bool stackable, int price = untradablePrice)
         {

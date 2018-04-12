@@ -22,16 +22,16 @@ namespace GameLib.Rooms
         public Room(int seed)
         {
             Seed = seed;
-            Width = Display.Width - 2;
-            Height = Display.Height - 4;
+            Width = 64;
+            Height = 32;
             tiles = new Tile[Width, Height];
-
             mobs = new List<Mob>();
-            InitRoom();
+
+            GenerateRoomLayout();
             PopulateRoom();
         }
 
-        private void InitRoom()
+        private void GenerateRoomLayout()
         {
             for (int x = 0; x < Width; x++)
             {

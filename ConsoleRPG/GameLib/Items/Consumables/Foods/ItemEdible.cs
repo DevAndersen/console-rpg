@@ -8,7 +8,7 @@ using GameLib.Mobs;
 namespace GameLib.Items.Consumables.Foods
 {
     [Serializable]
-    public class ItemEdible : ItemConsumableBase
+    public class ItemEdible : ItemConsumable
     {
         public int HealAmount { get; }
         private EdibleType edibleType;

@@ -26,7 +26,7 @@ namespace GameLib.Rendering.Displays
         {
             if (id == optionNewGame)
             {
-                return new DisplayRoom(this);
+                return new DisplayTextInput(this, new DisplayRoom(this), SetPlayerName, "Enter a name", 32);
             }
             else if (id == optionLoadGame)
             {
@@ -41,6 +41,11 @@ namespace GameLib.Rendering.Displays
             {
                 return this;
             }
+        }
+
+        private void SetPlayerName(string playerName)
+        {
+            Core.instance.game.player = new Player(playerName);
         }
 
         public override Display HandleAlternativeInput(ConsoleKey read)

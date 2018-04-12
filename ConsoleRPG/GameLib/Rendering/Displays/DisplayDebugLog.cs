@@ -18,7 +18,7 @@ namespace GameLib.Rendering.Displays
         public override Display Run()
         {
             ConsoleKey read = ReadKey();
-            if (read == ConsoleKey.X)
+            if (read == ConsoleKey.Escape)
             {
                 return previousDisplay;
             }

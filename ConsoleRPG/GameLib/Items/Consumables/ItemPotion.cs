@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GameLib.Items.Consumables
 {
     [Serializable]
-    public class ItemPotion : ItemConsumableBase
+    public class ItemPotion : ItemConsumable
     {
         private Effect effect;
 

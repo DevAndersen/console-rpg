@@ -61,7 +61,7 @@ namespace GameLib.Rendering.Displays
 
         public override Display HandleAlternativeInput(ConsoleKey read)
         {
-            if (read == ConsoleKey.X)
+            if (read == ConsoleKey.Escape)
             {
                 return previousDisplay;
             }

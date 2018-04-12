@@ -12,13 +12,7 @@ namespace GameLib.Mobs
     public abstract class MobAttackable : Mob
     {
         public int Health { get; set; }
-        public bool Alive
-        {
-            get
-            {
-                return Health > 0;
-            }
-        }
+        public bool Alive { get => Health > 0; }
 
         public ItemArmor Helm { get; set; }
         public ItemArmor Torso { get; set; }
@@ -46,12 +40,15 @@ namespace GameLib.Mobs
 
         public void DamageDirectly(int damageAmount)
         {
+            Health -= damageAmount;
             UpdateHealth();
         }
 
         public void Damage(MobAttackable enemy)
         {
             throw new NotImplementedException();
+
+            UpdateHealth();
         }
 
         private void UpdateHealth()

@@ -17,7 +17,7 @@ namespace GameLib.GameCore
 
         public Game()
         {
-            player = new Player("Test Name");
+            player = new Player("Defauto");
         }
     }
 }

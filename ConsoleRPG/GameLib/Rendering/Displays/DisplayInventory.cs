@@ -34,7 +34,7 @@ namespace GameLib.Rendering.Displays
             }
 
             ConsoleKey read = ReadKey();
-            if (read == ConsoleKey.X)
+            if (read == ConsoleKey.Escape)
             {
                 if (inventoryMode != InventoryMode.None)
                 {

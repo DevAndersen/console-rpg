@@ -24,6 +24,7 @@ namespace GameConsole
 
         public void StartGame()
         {
+            Console.Title = Core.GameName;
             Console.WindowWidth = Display.Width;
             Console.WindowHeight = Display.Height + 2;
             grid = new Pxl[Display.Width, Display.Height];

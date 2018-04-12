@@ -52,6 +52,9 @@ namespace GameLib.Rendering.Displays
 
             //(char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[,] roomGrid = new (char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[Width, Height];
 
+            int offsetX = Width / 2 - room.Width / 2;
+            int offsetY = Height / 2 - room.Height / 2 - 2;
+
             for (int x = 0; x < room.Width; x++)
             {
                 for (int y = 0; y < room.Height; y++)
@@ -63,7 +66,7 @@ namespace GameLib.Rendering.Displays
                     ConsoleColor foregroundColor = mob == null ? ConsoleColor.White : mob.Color;
                     ConsoleColor backgroundColor = tile.Color;
 
-                    Write(character, x + 1, y + 1, foregroundColor, backgroundColor);
+                    Write(character, offsetX + x + 1, offsetY + y + 1, foregroundColor, backgroundColor);
                 }
             }
         }

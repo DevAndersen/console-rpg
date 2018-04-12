@@ -33,8 +33,9 @@ namespace GameLib.Rendering.Displays
 
             public void RenderMenuExit()
             {
-                display.Write("X", Width - 3, 1, ConsoleColor.Red);
-                display.DrawResource("menuBorderVerticalLine", Width - 5, 0);
+                string text = ConsoleKey.Escape.ToString();
+                display.Write(text, Width - text.Length - 2, 1, ConsoleColor.Yellow);
+                display.DrawResource("menuBorderVerticalLine", Width - text.Length - 4, 0);
             }
 
             public void RenderMenuBar(MenuBarItem[] menuBarItems, int x = 1, int y = -1)
@@ -63,6 +64,30 @@ namespace GameLib.Rendering.Displays
                     display.DrawResource("menuBorderVerticalLine", offset + 2 + item.Text.Length, y - 1);
                     offset += 3 + item.Text.Length;
                 }
+            }
+
+            public void RenderInputField(int length, string text, int x = -1, int y = -1)
+            {
+                if (x == -1)
+                {
+                    x = Width / 2 - length / 2;
+                }
+                if (y == -1)
+                {
+                    y = Height / 2 - 1;
+                }
+
+                for (int i = 0; i < length; i++)
+                {
+                    display.DrawResource("inputFieldMiddle", x + i, y);
+                }
+                display.Write(text, x, y + 1);
+                if (text.Length < length)
+                {
+                    display.Write("_", x + text.Length, y + 1);
+                }
+                display.DrawResource("inputFieldLeft", x - 1, y);
+                display.DrawResource("inputFieldRight", x + length, y);
             }
 
             public void ClearDisplay()

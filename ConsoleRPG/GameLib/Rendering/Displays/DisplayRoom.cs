@@ -29,11 +29,11 @@ namespace GameLib.Rendering.Displays
             {
                 return new DisplayPauseMenu(this);
             }
-            else if (read == ConsoleKey.W || read == ConsoleKey.A || read == ConsoleKey.S || read == ConsoleKey.D)
+            else if (read == ConsoleKey.UpArrow || read == ConsoleKey.LeftArrow || read == ConsoleKey.DownArrow || read == ConsoleKey.RightArrow)
             {
                 MobPlayer player = room.GetPlayer();
-                int x = (read == ConsoleKey.A ? -1 : (read == ConsoleKey.D ? 1 : 0));
-                int y = (read == ConsoleKey.W ? -1 : (read == ConsoleKey.S ? 1 : 0));
+                int x = (read == ConsoleKey.LeftArrow ? -1 : (read == ConsoleKey.RightArrow ? 1 : 0));
+                int y = (read == ConsoleKey.UpArrow ? -1 : (read == ConsoleKey.DownArrow ? 1 : 0));
                 bool result = room.MoveMobRelative(player, x, y);
             }
             return this;
@@ -45,7 +45,7 @@ namespace GameLib.Rendering.Displays
             prefabs.RenderMenuBar(new MenuBarItem[]
             {
                 new MenuBarItem("[WIP] ROOM DESCRIPTION"),
-                new MenuBarItem("W, A, S, D to move", ConsoleColor.DarkCyan),
+                new MenuBarItem("Arrow keys to move", ConsoleColor.DarkCyan),
                 new MenuBarItem(ConsoleKey.E, "Character menu", ConsoleColor.Green),
                 new MenuBarItem(ConsoleKey.Escape, "Pause menu", ConsoleColor.Yellow)
             });

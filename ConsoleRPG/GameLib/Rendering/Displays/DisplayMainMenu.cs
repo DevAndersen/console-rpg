@@ -56,9 +56,9 @@ namespace GameLib.Rendering.Displays
         protected override void RenderDisplay()
         {
             DrawResource("simpleBorder", 0, 0);
-            (int resourceX, int resourceY, int resourceWidth, int resourceHeight) logo = DrawResource("logo", null, 2);
+            (int resourceX, int resourceY, int resourceWidth, int resourceHeight) = DrawResource("logo", null, 2);
 
-            int textOffset = logo.resourceY + logo.resourceHeight + 5;
+            int textOffset = resourceY + resourceHeight + 5;
 
             for (int i = 0; i < options.Count; i++)
             {

@@ -47,6 +47,11 @@ namespace GameLib.GameCore
             }
         }
 
+        public void ForceDisplayUpdate()
+        {
+            OnDisplayUpdate.Invoke(game.currentDisplay.Render());
+        }
+
         public ConsoleKeyInfo ReadKey()
         {
             return gameHandler.ReadKey();

@@ -171,7 +171,7 @@ namespace GameLib.Rendering.Displays
             {
                 new MenuBarItem(slotString),
                 new MenuBarItem(ConsoleKey.Enter, "Swap slots", ConsoleColor.Green),
-                new MenuBarItem(ConsoleKey.X, "Cancel", ConsoleColor.Red),
+                new MenuBarItem(ConsoleKey.Escape, "Cancel", ConsoleColor.Red),
             });
         }
 
@@ -188,7 +188,7 @@ namespace GameLib.Rendering.Displays
             {
                 new MenuBarItem(slotString),
                 new MenuBarItem(ConsoleKey.Enter, "Yes", ConsoleColor.Green),
-                new MenuBarItem(ConsoleKey.X, "No", ConsoleColor.Red),
+                new MenuBarItem(ConsoleKey.Escape, "No", ConsoleColor.Red),
             });
         }
 

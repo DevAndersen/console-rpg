@@ -31,6 +31,11 @@ namespace GameLib.Rooms
             PopulateRoom();
         }
 
+        public void Tick()
+        {
+            mobs.RemoveAll(x => x is MobAttackable mobAttackable && !mobAttackable.Alive);
+        }
+
         private void GenerateRoomLayout()
         {
             for (int x = 0; x < Width; x++)
@@ -51,12 +56,10 @@ namespace GameLib.Rooms
 
         private void PopulateRoom()
         {
-            MobPlayer player = new MobPlayer(2, 2, 20);
-            mobs.Add(player);
-        }
-
-        private void Tick()
-        {
+            mobs.Add(new MobPlayer(2, 2, 20));
+            mobs.Add(new MobMonster(MonsterList.zombie, 4, 2));
+            mobs.Add(new MobMonster(MonsterList.zombie, 6, 2));
+            mobs.Add(new MobMonster(MonsterList.zombie, 8, 2));
 
         }
 

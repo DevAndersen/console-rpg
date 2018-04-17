@@ -32,15 +32,21 @@ namespace GameLib.Rendering.Displays
             else if (read == ConsoleKey.UpArrow || read == ConsoleKey.LeftArrow || read == ConsoleKey.DownArrow || read == ConsoleKey.RightArrow)
             {
                 MobPlayer player = room.GetPlayer();
-                int x = (read == ConsoleKey.LeftArrow ? -1 : (read == ConsoleKey.RightArrow ? 1 : 0));
-                int y = (read == ConsoleKey.UpArrow ? -1 : (read == ConsoleKey.DownArrow ? 1 : 0));
-                bool result = room.MoveMobRelative(player, x, y);
+                int moveX = (read == ConsoleKey.LeftArrow ? -1 : (read == ConsoleKey.RightArrow ? 1 : 0));
+                int moveY = (read == ConsoleKey.UpArrow ? -1 : (read == ConsoleKey.DownArrow ? 1 : 0));
+                if (room.GetMobForPos(player.X + moveX, player.Y + moveY) is MobAttackable mobAttackable)
+                {
+                    return new DisplayCombat(this, player, mobAttackable);
+                }
+                bool result = room.MoveMobRelative(player, moveX, moveY);
+                return this;
             }
             return this;
         }
 
         protected override void RenderDisplay()
         {
+            room.Tick();
             prefabs.RenderBorderBottomBar();
             prefabs.RenderMenuBar(new MenuBarItem[]
             {
@@ -49,8 +55,6 @@ namespace GameLib.Rendering.Displays
                 new MenuBarItem(ConsoleKey.E, "Character menu", ConsoleColor.Green),
                 new MenuBarItem(ConsoleKey.Escape, "Pause menu", ConsoleColor.Yellow)
             });
-
-            //(char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[,] roomGrid = new (char? c, ConsoleColor foregroundColor, ConsoleColor backgroundColor)[Width, Height];
 
             int offsetX = Width / 2 - room.Width / 2;
             int offsetY = Height / 2 - room.Height / 2 - 2;

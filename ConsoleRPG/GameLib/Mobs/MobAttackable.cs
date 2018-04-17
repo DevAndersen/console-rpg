@@ -1,5 +1,4 @@
 ﻿using GameLib.Effects;
-using GameLib.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +10,15 @@ namespace GameLib.Mobs
     [Serializable]
     public abstract class MobAttackable : Mob
     {
+        private static Random rand = new Random();
+
         public int Health { get; set; }
-        public bool Alive { get => Health > 0; }
-
-        public ItemArmor Helm { get; set; }
-        public ItemArmor Torso { get; set; }
-        public ItemArmor Legs { get; set; }
-        public ItemArmor Hands { get; set; }
-        public ItemArmor Feet { get; set; }
-
-        public ItemWeapon Weapon { get; set; }
-
-        private int maxHealth;
+        public int MaxHealth { get; }
+        public bool Alive => Health > 0;
 
         public MobAttackable(int x, int y, int health) : base(x, y)
         {
-            maxHealth = health;
+            MaxHealth = health;
             Health = health;
         }
 
@@ -44,18 +36,40 @@ namespace GameLib.Mobs
             UpdateHealth();
         }
 
-        public void Damage(MobAttackable enemy)
+        public int Damage(MobAttackable enemy)
         {
-            throw new NotImplementedException();
+            int damage = enemy.CalculateDamage();
+            int accuracy = enemy.CalculateAccuracy();
+            int armor = CalculateArmor();
 
-            UpdateHealth();
+            damage = damage < 0 ? 0 : damage;
+            accuracy = accuracy < 0 ? 0 : accuracy;
+            armor = armor < 0 ? 0 : armor;
+
+            int effectiveAccuracy = accuracy > (armor * 2) ? (armor * 2) : accuracy;
+            int armorPenetration = armor <= 0 ? 1 : (effectiveAccuracy / (armor * 2));
+            int damagePenetration = damage * armorPenetration;
+
+            damagePenetration = damagePenetration < 0 ? 0 : damagePenetration;
+
+            //int damageMin = damagePenetration
+
+            int actualDamage = /*VALUE*/1;
+            DamageDirectly(actualDamage);
+            return actualDamage;
         }
+
+        protected abstract int CalculateDamage();
+
+        protected abstract int CalculateAccuracy();
+
+        protected abstract int CalculateArmor();
 
         private void UpdateHealth()
         {
-            if (Health > maxHealth)
+            if (Health > MaxHealth)
             {
-                Health = maxHealth;
+                Health = MaxHealth;
             }
             else if (Health < 1)
             {

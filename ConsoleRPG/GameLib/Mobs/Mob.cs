@@ -9,6 +9,7 @@ namespace GameLib.Mobs
     [Serializable]
     public abstract class Mob
     {
+        public abstract string Name { get; }
         public abstract char Character { get; }
         public abstract ConsoleColor Color { get; }
 

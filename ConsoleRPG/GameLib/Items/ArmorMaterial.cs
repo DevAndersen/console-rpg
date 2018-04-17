@@ -15,15 +15,13 @@ namespace GameLib.Items
             public static readonly ArmorMaterial iron = new ArmorMaterial("Iron", 1);
         }
 
-        public string DefaultText { get; set; }
-        public int ArmorMultiplier { get; }
-        public int DamageMultiplier { get; }
+        public string DefaultText { get; }
+        public int Multiplier { get; }
 
-        public ArmorMaterial(string defaultText, int armorMultiplier, int damageMultiplier = 1)
+        public ArmorMaterial(string defaultText, int multiplier)
         {
             DefaultText = defaultText;
-            ArmorMultiplier = armorMultiplier;
-            DamageMultiplier = damageMultiplier;
+            Multiplier = multiplier;
         }
     }
 }

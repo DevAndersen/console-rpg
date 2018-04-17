@@ -13,7 +13,7 @@ namespace GameLib.GameCore
     [Serializable]
     public class Game
     {
-        public bool DebugMode { get; set; } = true;
+        public bool DebugMode { get; set; } = false;
         public Player player;
         public Display currentDisplay;
         public Display NextDisplay;

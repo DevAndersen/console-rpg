@@ -11,8 +11,17 @@ namespace GameLib.GameCore
     public class Player
     {
         public string Name { get; }
+        public int Health { get; set; }
 
         public Inventory inventory;
+
+        public ItemArmor Head { get; set; }
+        public ItemArmor Torso { get; set; }
+        public ItemArmor Legs { get; set; }
+        public ItemArmor Hands { get; set; }
+        public ItemArmor Feet { get; set; }
+
+        public ItemWeapon Weapon { get; set; }
 
         public Player(string name)
         {

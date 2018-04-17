@@ -85,6 +85,11 @@ namespace GameLib.Rendering.Displays
             }
         }
 
+        protected void ForceDisplayUpdate()
+        {
+            Core.instance.ForceDisplayUpdate();
+        }
+
         /// <summary>
         /// Draws the specified resource, according to the specified parameters. In the resource, '~' will not be drawn, allowing for "transparency".
         /// </summary>

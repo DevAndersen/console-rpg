@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLib.Mobs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -97,6 +98,22 @@ namespace GameLib.Rendering.Displays
                 {
                     display.Write(sbClearline.ToString(), 0, i, ConsoleColor.Gray, ConsoleColor.Black);
                 }
+            }
+
+            public void RenderHealthBar(MobAttackable mob, int length, int? x, int? y)
+            {
+                int alive = (int)(((double)mob.Health / mob.MaxHealth) * length);
+
+                for (int i = 0; i < length; i++)
+                {
+                    display.Write(" ", ((Width / 2) - (length / 2)) + i, y, i < alive ? ConsoleColor.Black : ConsoleColor.White, i < alive ? ConsoleColor.Green : ConsoleColor.Red);
+                }
+            }
+
+            public void RenderHealthText(MobAttackable mob, int? x, int? y)
+            {
+                string healthString = $"{mob.Health}/{mob.MaxHealth}";
+                display.Write(healthString, x, y);
             }
         }
     }

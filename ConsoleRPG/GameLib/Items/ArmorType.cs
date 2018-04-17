@@ -18,7 +18,7 @@ namespace GameLib.Items
             public static readonly ArmorType feet = new ArmorType("boots", 1);
         }
 
-        public string DefaultText { get; set; }
+        public string DefaultText { get; }
         public int BaseArmor { get; }
 
         public ArmorType(string defaultText, int baseArmor)

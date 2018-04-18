@@ -57,7 +57,7 @@ namespace GameLib.Rooms
         private void PopulateRoom()
         {
             mobs.Add(new MobPlayer(2, 2, 20));
-            mobs.Add(new MobMonster(MonsterList.zombie, 4, 2));
+            mobs.Add(new MobMonster(MonsterList.skeleton, 4, 2));
             mobs.Add(new MobMonster(MonsterList.zombie, 6, 2));
             mobs.Add(new MobMonster(MonsterList.zombie, 8, 2));
 

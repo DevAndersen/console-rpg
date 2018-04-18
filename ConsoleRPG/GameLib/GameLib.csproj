@@ -81,6 +81,7 @@
     <Compile Include="Rendering\Displays\DisplayInventory.cs" />
     <Compile Include="Rendering\Displays\DisplayItemList.cs" />
     <Compile Include="Rendering\Displays\DisplayListMenu.cs" />
+    <Compile Include="Rendering\Displays\DisplayLootInventory.cs" />
     <Compile Include="Rendering\Displays\DisplayMainMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPauseMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPrefabs.cs" />

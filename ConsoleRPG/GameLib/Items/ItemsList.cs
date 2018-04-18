@@ -20,6 +20,7 @@ namespace GameLib.Items
 
         #region General
         public static readonly Item coin = new Item("Coin", true);
+        public static readonly Item bone = new Item("Bone", true);
         #endregion
 
         #region Equipment

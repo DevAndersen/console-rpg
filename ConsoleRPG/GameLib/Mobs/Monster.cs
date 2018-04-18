@@ -31,7 +31,7 @@ namespace GameLib.Mobs
             this.dropTable = dropTable;
         }
 
-        public List<ItemStack> GenerateDrops()
+        public ItemStack[] GenerateDrops()
         {
             List<ItemStack> drops = new List<ItemStack>();
 
@@ -42,7 +42,7 @@ namespace GameLib.Mobs
                     drops.Add(drop.GetItemStack());
                 }
             }
-            return drops;
+            return drops.ToArray();
         }
 
         private double GenerateDropChance()

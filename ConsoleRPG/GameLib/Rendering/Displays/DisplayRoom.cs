@@ -34,7 +34,7 @@ namespace GameLib.Rendering.Displays
                 MobPlayer player = room.GetPlayer();
                 int moveX = (read == ConsoleKey.LeftArrow ? -1 : (read == ConsoleKey.RightArrow ? 1 : 0));
                 int moveY = (read == ConsoleKey.UpArrow ? -1 : (read == ConsoleKey.DownArrow ? 1 : 0));
-                if (room.GetMobForPos(player.X + moveX, player.Y + moveY) is MobAttackable mobAttackable)
+                if (room.GetMobForPos(player.X + moveX, player.Y + moveY) is MobMonster mobAttackable)
                 {
                     return new DisplayCombat(this, player, mobAttackable);
                 }

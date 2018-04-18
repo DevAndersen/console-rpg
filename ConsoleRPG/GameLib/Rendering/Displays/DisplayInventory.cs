@@ -20,7 +20,7 @@ namespace GameLib.Rendering.Displays
             inventoryMode = InventoryMode.Default;
         }
 
-        protected override ItemStringData[] ProvideTextForItem(ItemStack item, int itemIndex)
+        public static ItemStringData[] InventoryTextForItem(ItemStack item, int itemIndex)
         {
             return new ItemStringData[]
             {
@@ -28,6 +28,11 @@ namespace GameLib.Rendering.Displays
                 new ItemStringData("Amount", 10, item?.Amount.ToString()),
                 new ItemStringData("Price", 11, item == null ? "" : (item.Item.Tradable ? item?.Item.Price.ToString() : "Untradeable"))
             };
+        }
+
+        protected override ItemStringData[] ProvideTextForItem(ItemStack item, int itemIndex)
+        {
+            return InventoryTextForItem(item, itemIndex);
         }
 
         protected override void RenderItemList()

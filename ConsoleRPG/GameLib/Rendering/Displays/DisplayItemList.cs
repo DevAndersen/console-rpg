@@ -196,7 +196,7 @@ namespace GameLib.Rendering.Displays
             return itemsArray;
         }
 
-        protected class ItemStringData
+        public class ItemStringData
         {
             public string Title { get; }
             public int Length { get; }

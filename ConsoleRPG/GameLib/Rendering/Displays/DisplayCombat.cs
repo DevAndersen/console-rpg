@@ -12,12 +12,12 @@ namespace GameLib.Rendering.Displays
     public class DisplayCombat : Display
     {
         public MobPlayer Player { get; }
-        public MobAttackable Enemy { get; }
+        public MobMonster Enemy { get; }
 
         private int? playerDamage = null;
         private int? enemyDamage = null;
 
-        public DisplayCombat(Display previousDisplay, MobPlayer player, MobAttackable enemy) : base(previousDisplay)
+        public DisplayCombat(Display previousDisplay, MobPlayer player, MobMonster enemy) : base(previousDisplay)
         {
             Player = player;
             Enemy = enemy;
@@ -62,7 +62,7 @@ namespace GameLib.Rendering.Displays
 
         private Display OnPlayerVictorious()
         {
-            return previousDisplay;
+            return new DisplayLootInventory(previousDisplay, Enemy.Monster, Enemy.Monster.GenerateDrops(), Player.Player.inventory);
         }
 
         protected override void RenderDisplay()

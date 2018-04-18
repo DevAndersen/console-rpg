@@ -8,193 +8,139 @@ using System.Threading.Tasks;
 namespace GameLib.Rendering.Displays
 {
     [Serializable]
-    public class DisplayInventory : Display
+    public class DisplayInventory : DisplayItemList<ItemStack>
     {
-        Inventory inventory;
-        int slot = 0;
-        int offset = 0;
-        int slotsToRender = (int)Math.Ceiling(((double)Height - 6) / 2);
+        private Inventory inventory;
+        private InventoryMode inventoryMode;
+        private int swapSlot;
 
-        InventoryMode inventoryMode = InventoryMode.None;
-        int swapSlot;
-        int destroySlot;
-
-        public DisplayInventory(Display previousDisplay, Inventory inventory) : base(previousDisplay)
+        public  DisplayInventory(Display previousDisplay, Inventory inventory) : base(previousDisplay, inventory.GetItems().ToArray(), $"{inventory.Name}'s Inventory", true, DisplayItemListMode.ItemMode)
         {
             this.inventory = inventory;
-            inventory.AddItemStack(new ItemStack(ItemsList.daggerWood, 1));
-            inventory.AddItemStack(new ItemStack(ItemsList.itemOne, 4));
+            inventoryMode = InventoryMode.Default;
         }
 
-        public override Display Run()
+        protected override ItemStringData[] ProvideTextForItem(ItemStack item, int itemIndex)
         {
-            if (inventory == null)
+            return new ItemStringData[]
             {
-                return previousDisplay;
-            }
-
-            ConsoleKey read = ReadKey();
-            if (read == ConsoleKey.Escape)
-            {
-                if (inventoryMode != InventoryMode.None)
-                {
-                    inventoryMode = InventoryMode.None;
-                    return this;
-                }
-                else
-                {
-                    return previousDisplay;
-                }
-            }
-            else if (read == ConsoleKey.UpArrow)
-            {
-                if (slot > 0)
-                {
-                    if (slot == -offset)
-                    {
-                        offset++;
-                    }
-                    slot--;
-                }
-                return this;
-            }
-            else if (read == ConsoleKey.DownArrow)
-            {
-                if (slot < inventory.Size - 1)
-                {
-                    slot++;
-                    if (slot + offset == slotsToRender)
-                    {
-                        offset--;
-                    }
-                }
-                return this;
-            }
-            else if (read == ConsoleKey.S && (inventoryMode == InventoryMode.None || inventoryMode == InventoryMode.Swap))
-            {
-                inventoryMode = InventoryMode.Swap;
-                swapSlot = slot;
-                return this;
-            }
-            else if (read == ConsoleKey.D && inventoryMode == InventoryMode.None && inventory.GetSlot(slot) != null)
-            {
-                inventoryMode = InventoryMode.Destroy;
-                destroySlot = slot;
-                return this;
-            }
-            else if (read == ConsoleKey.Enter)
-            {
-                if (inventoryMode == InventoryMode.Swap)
-                {
-                    inventory.SwapSlots(swapSlot, slot);
-                    inventoryMode = InventoryMode.None;
-                }
-                else if (inventoryMode == InventoryMode.Destroy)
-                {
-                    inventory.ClearSlot(destroySlot);
-                    inventoryMode = InventoryMode.None;
-                }
-                return this;
-            }
-            else
-            {
-                return this;
-            }
+                new ItemStringData("Item", 30, item?.Item.Name, $"- Empty (slot {itemIndex + 1}) -"),
+                new ItemStringData("Amount", 10, item?.Amount.ToString()),
+                new ItemStringData("Price", 11, item == null ? "" : (item.Item.Tradable ? item?.Item.Price.ToString() : "Untradeable"))
+            };
         }
 
-        protected override void RenderDisplay()
+        protected override void RenderItemList()
         {
-            prefabs.RenderMenuBorder(inventory.Name);
-            
-            RenderInventory(inventory, 0);
-
-            DrawResource("menuBorderHorizontalLine", 0, Height - 3);
-
-            if (inventoryMode == InventoryMode.None)
+            if (inventoryMode == InventoryMode.Default)
             {
-                RenderModeNone();
+                prefabs.RenderMenuExit();
+                prefabs.RenderMenuBar(new MenuBarItem[]
+                {
+                    new MenuBarItem(ConsoleKey.S, "Swap slots", ConsoleColor.Yellow),
+                    new MenuBarItem(ConsoleKey.D, "Destroy item", ConsoleColor.Red)
+                });
             }
             else if (inventoryMode == InventoryMode.Swap)
             {
-                RenderModeSwap();
+                prefabs.RenderMenuBar(new MenuBarItem[]
+                {
+                    new MenuBarItem($"Swapping {inventory.GetSlot(selectedIndex)?.Item.Name} (slot {selectedIndex + 1})"),
+                    new MenuBarItem(ConsoleKey.Enter, "Swap slots", ConsoleColor.Green),
+                    new MenuBarItem(ConsoleKey.Escape, "Cancel", ConsoleColor.Yellow),
+                });
             }
             else if (inventoryMode == InventoryMode.Destroy)
             {
-                RenderModeDestroy();
-            }
-
-            Write(">", 1, 3 + ((slot + offset) * 2));
-        }
-
-        private void RenderInventory(Inventory specificInventory, int xOffset)
-        {
-            for (int slotIndex = 0 - offset; slotIndex < -offset + slotsToRender; slotIndex++)
-            {
-                string slotString = $"Empty [Slot {(slotIndex + 1)}]";
-                ConsoleColor slotColor = ConsoleColor.DarkGray;
-                if (specificInventory.GetSlot(slotIndex) != null)
+                prefabs.RenderMenuBar(new MenuBarItem[]
                 {
-                    slotString = specificInventory.GetSlot(slotIndex).ToString();
-                    slotColor = ConsoleColor.Gray;
+                    new MenuBarItem($"Destroy {inventory.GetSlot(selectedIndex)?.Item.Name} (slot {selectedIndex + 1})?"),
+                    new MenuBarItem(ConsoleKey.Enter, "Destroy item", ConsoleColor.Red),
+                    new MenuBarItem(ConsoleKey.Escape, "Cancel", ConsoleColor.Yellow),
+                });
+            }
+        }
+
+        protected override void RenderItemStringDecoration(ItemStack item, int index, bool selected, int y)
+        {
+            if (inventoryMode == InventoryMode.Swap)
+            {
+                if (index == swapSlot)
+                {
+                    Write(">", 1, y, ConsoleColor.Green);
                 }
-                int posX = 3 + xOffset;
-                int posY = 3 + ((slotIndex + offset) * 2);
-                Write(slotString, posX, posY, slotColor);
             }
         }
 
-        private void RenderModeNone()
+        protected override Display RunItemList(ConsoleKey read)
         {
-            prefabs.RenderMenuExit();
-            prefabs.RenderMenuBar(new MenuBarItem[]
+            if (read == ConsoleKey.Escape)
             {
-                new MenuBarItem(ConsoleKey.S, "Swap slots", ConsoleColor.Green),
-                new MenuBarItem(ConsoleKey.D, "Destroy item", ConsoleColor.Red),
-            });
+                if (inventoryMode != InventoryMode.Default)
+                {
+                    SetInventoryMode(InventoryMode.Default);
+                    return this;
+                }
+                return previousDisplay;
+            }
+            else if (inventoryMode == InventoryMode.Default)
+            {
+                if (read == ConsoleKey.S)
+                {
+                    swapSlot = selectedIndex;
+                    SetInventoryMode(InventoryMode.Swap);
+                    return this;
+                }
+                else if (read == ConsoleKey.D && inventory.GetSlot(selectedIndex) != null)
+                {
+                    SetInventoryMode(InventoryMode.Destroy);
+                    return this;
+                }
+            }
+            else if (inventoryMode == InventoryMode.Swap)
+            {
+                if (read == ConsoleKey.Enter && swapSlot != selectedIndex && !(inventory.GetSlot(swapSlot) == null && inventory.GetSlot(selectedIndex) == null))
+                {
+                    inventory.SwapSlots(swapSlot, selectedIndex);
+                    SetInventoryMode(InventoryMode.Default);
+                }
+            }
+            else if (inventoryMode == InventoryMode.Destroy)
+            {
+                if (read == ConsoleKey.Enter)
+                {
+                    inventory.ClearSlot(selectedIndex);
+                    SetInventoryMode(InventoryMode.Default);
+                }
+            }
+            return this;
         }
 
-        private void RenderModeSwap()
+        private void SetInventoryMode(InventoryMode inventoryMode)
         {
-            if ((swapSlot + offset) < slotsToRender && (swapSlot + offset) >= 0)
+            if (inventoryMode == InventoryMode.Default)
             {
-                Write(">", 1, 3 + ((swapSlot + offset) * 2), ConsoleColor.DarkGreen);
+                AllowScrolling = true;
             }
-
-            string slotString = "Empty";
-            if (inventory.GetSlot(swapSlot) != null)
+            else if (inventoryMode == InventoryMode.Swap)
             {
-                slotString = inventory.GetSlot(swapSlot).ToString();
+                AllowScrolling = true;
             }
-            slotString = $"Swapping {slotString} [Slot {swapSlot + 1}]";
-
-            prefabs.RenderMenuBar(new MenuBarItem[]
+            else if (inventoryMode == InventoryMode.Destroy)
             {
-                new MenuBarItem(slotString),
-                new MenuBarItem(ConsoleKey.Enter, "Swap slots", ConsoleColor.Green),
-                new MenuBarItem(ConsoleKey.Escape, "Cancel", ConsoleColor.Red),
-            });
+                AllowScrolling = false;
+            }
+            this.inventoryMode = inventoryMode;
         }
 
-        private void RenderModeDestroy()
+        protected override ItemStack[] GetListItems()
         {
-            string slotString = "Empty";
-            if (inventory.GetSlot(destroySlot) != null)
-            {
-                slotString = inventory.GetSlot(destroySlot).ToString();
-            }
-            slotString = $"Destroy {slotString}?";
-
-            prefabs.RenderMenuBar(new MenuBarItem[]
-            {
-                new MenuBarItem(slotString),
-                new MenuBarItem(ConsoleKey.Enter, "Yes", ConsoleColor.Green),
-                new MenuBarItem(ConsoleKey.Escape, "No", ConsoleColor.Red),
-            });
+            return inventory.GetItems().ToArray();
         }
 
-        private enum InventoryMode
+        protected enum InventoryMode
         {
-            None,
+            Default,
             Swap,
             Destroy
         }

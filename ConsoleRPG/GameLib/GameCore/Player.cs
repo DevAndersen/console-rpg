@@ -27,6 +27,13 @@ namespace GameLib.GameCore
         {
             Name = name;
             inventory = new Inventory(Name, 30);
+            AddStartItems();
+        }
+
+        private void AddStartItems()
+        {
+            inventory.AddItemStack(new ItemStack(ItemsList.coin, 10));
+            inventory.AddItemStack(new ItemStack(ItemsList.bread, 1));
         }
     }
 }

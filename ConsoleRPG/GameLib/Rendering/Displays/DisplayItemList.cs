@@ -13,27 +13,28 @@ namespace GameLib.Rendering.Displays
 
         private const int columnSpacing = 2;
 
-        private T[] items;
+        private T[] itemsArray;
         private string title;
         private bool hasTopBar;
 
-        private int selectedIndex = 0;
+        protected int selectedIndex = 0;
         private int viewOffset = 0;
         private DisplayItemListMode displayItemListMode;
         private int possibleItemsToRender;
 
-        protected DisplayItemList(Display previousDisplay, T[] items, string title, bool hasTopBar, DisplayItemListMode displayItemListMode) : base(previousDisplay)
+        protected DisplayItemList(Display previousDisplay, T[] itemsArray, string title, bool hasTopBar, DisplayItemListMode displayItemListMode) : base(previousDisplay)
         {
-            this.items = items;
+            this.itemsArray = itemsArray;
             this.title = title;
             this.hasTopBar = hasTopBar;
             this.displayItemListMode = displayItemListMode;
             possibleItemsToRender = (int)Math.Ceiling(((double)Height - 6) / 2) - (hasTopBar ? 1 : 0);
+            AllowScrolling = true;
         }
 
         public override Display Run()
         {
-            if (items == null)
+            if (GetListItems() == null)
             {
                 return previousDisplay;
             }
@@ -77,7 +78,7 @@ namespace GameLib.Rendering.Displays
         {
             if (displayItemListMode == DisplayItemListMode.ItemMode)
             {
-                if (selectedIndex < items.Length - 1)
+                if (selectedIndex < GetListItems().Length - 1)
                 {
                     selectedIndex++;
                     if (selectedIndex + viewOffset == possibleItemsToRender)
@@ -88,7 +89,7 @@ namespace GameLib.Rendering.Displays
             }
             else if (displayItemListMode == DisplayItemListMode.ScrollMode)
             {
-                if (viewOffset > -(items.Length - possibleItemsToRender))
+                if (viewOffset > -(GetListItems().Length - possibleItemsToRender))
                 {
                     viewOffset--;
                 }
@@ -100,7 +101,7 @@ namespace GameLib.Rendering.Displays
 
         protected override void RenderDisplay()
         {
-            if (items == null)
+            if (GetListItems() == null)
             {
                 return;
             }
@@ -119,7 +120,7 @@ namespace GameLib.Rendering.Displays
         {
             int offset = hasTopBar ? 5 : 3;
 
-            int slotsToRender = (possibleItemsToRender + viewOffset >= items.Length) ? items.Length - viewOffset : possibleItemsToRender;
+            int slotsToRender = (possibleItemsToRender + viewOffset >= GetListItems().Length) ? GetListItems().Length - viewOffset : possibleItemsToRender;
 
             StringBuilder columnTitles = new StringBuilder();
 
@@ -141,7 +142,7 @@ namespace GameLib.Rendering.Displays
                 int y = offset + (i * 2);
                 int itemIndex = i - viewOffset;
                 bool selected = itemIndex == selectedIndex;
-                T item = items[itemIndex];
+                T item = GetListItems()[itemIndex];
                 string itemText = GenerateItemText(item, itemIndex);
 
                 if (displayItemListMode == DisplayItemListMode.ItemMode)
@@ -189,6 +190,11 @@ namespace GameLib.Rendering.Displays
         protected abstract void RenderItemList();
 
         protected abstract void RenderItemStringDecoration(T item, int index, bool selected, int y);
+
+        protected virtual T[] GetListItems()
+        {
+            return itemsArray;
+        }
 
         protected class ItemStringData
         {

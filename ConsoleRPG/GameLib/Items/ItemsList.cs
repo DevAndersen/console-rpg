@@ -18,8 +18,12 @@ namespace GameLib.Items
         public static readonly Item itemOne = new Item("Item one", true);
         public static readonly Item itemTwo = new Item("Item two", false);
 
+        #region General
+        public static readonly Item coin = new Item("Coin", true);
+        #endregion
+
         #region Equipment
-        
+
         #region Weapons
         public static readonly ItemWeapon daggerWood = new ItemWeapon(WeaponType.Types.dagger, WeaponMaterial.Materials.wood, 3);
         #endregion

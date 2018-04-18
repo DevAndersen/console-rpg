@@ -110,11 +110,6 @@ namespace GameLib.Items
             }
         }
 
-        public void EmptySlot(int slot)
-        {
-            items[slot] = null;
-        }
-
         public bool RemoveItems(Item item, int amount)
         {
             long countMatchingItems = 0;

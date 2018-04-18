@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Rendering.Displays
 {
+    [Serializable]
     public class DisplayCombat : Display
     {
         public MobPlayer Player { get; }

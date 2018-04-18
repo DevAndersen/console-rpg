@@ -79,6 +79,7 @@
     <Compile Include="Rendering\Displays\DisplayDebugLog.cs" />
     <Compile Include="Rendering\Displays\DisplayGameOver.cs" />
     <Compile Include="Rendering\Displays\DisplayInventory.cs" />
+    <Compile Include="Rendering\Displays\DisplayItemList.cs" />
     <Compile Include="Rendering\Displays\DisplayListMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayMainMenu.cs" />
     <Compile Include="Rendering\Displays\DisplayPauseMenu.cs" />

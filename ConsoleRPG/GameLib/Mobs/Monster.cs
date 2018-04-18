@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Mobs
 {
+    [Serializable]
     public class Monster
     {
         private static Random rand = new Random();

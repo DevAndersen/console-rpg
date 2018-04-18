@@ -54,7 +54,7 @@ namespace GameLib.Mobs
 
             //int damageMin = damagePenetration
 
-            int actualDamage = /*VALUE*/1;
+            int actualDamage = damagePenetration;
             DamageDirectly(actualDamage);
             return actualDamage;
         }

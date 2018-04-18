@@ -23,7 +23,7 @@ namespace GameLib.Items
             }
         }
         
-        public ItemArmor(ArmorType type, ArmorMaterial material) : base(string.Empty, false)
+        public ItemArmor(ArmorType type, ArmorMaterial material, int price = -1) : base(string.Empty, false, price)
         {
             Type = type;
             Material = material;

@@ -8,61 +8,40 @@ using System.Threading.Tasks;
 namespace GameLib.Rendering.Displays
 {
     [Serializable]
-    public class DisplayDebugLog : Display
+    public class DisplayDebugLog : DisplayItemList<(string message, LoggingLevel level, DateTime timestamp)>
     {
-        public DisplayDebugLog(Display previousDisplay) : base(previousDisplay)
+        public DisplayDebugLog(Display previousDisplay, (string message, LoggingLevel level, DateTime timestamp)[] items) : base(previousDisplay, items, "Debug log", true, DisplayItemListMode.ScrollMode)
         {
 
         }
 
-        public override Display Run()
+        protected override ItemStringData[] ProvideTextForItem((string message, LoggingLevel level, DateTime timestamp) item, int itemIndex)
         {
-            ConsoleKey read = ReadKey();
+            return new ItemStringData[]
+            {
+                new ItemStringData("Timestamp", 9, item.timestamp.ToString("HH:mm:ss")),
+                new ItemStringData("Level", 8, item.level.ToString()),
+                new ItemStringData("Message", 100, item.message),
+            };
+        }
+
+        protected override void RenderItemList()
+        {
+            prefabs.RenderMenuExit();
+        }
+
+        protected override void RenderItemStringDecoration((string message, LoggingLevel level, DateTime timestamp) item, int index, bool selected, int y)
+        {
+
+        }
+
+        protected override Display RunItemList(ConsoleKey read)
+        {
             if (read == ConsoleKey.Escape)
             {
                 return previousDisplay;
             }
-            else
-            {
-                return this;
-            }
-        }
-
-        protected override void RenderDisplay()
-        {
-            prefabs.RenderMenuBorder("Log");
-            prefabs.RenderMenuExit();
-
-            (string message, LoggingLevel level, DateTime timestamp)[] logEntries = Logger.GetLog().ToArray();
-
-            for (int i = 0; i < logEntries.Length; i++)
-            {
-                (string message, LoggingLevel level, DateTime timestamp) = logEntries[i];
-
-                Write($"[{timestamp.ToString("hh:mm:ss")}] <{level}>\t{message}", 1, 3 + i, GetErrorColor(level));
-            }
-
-            if (logEntries.Length == 0)
-            {
-                Write("Log empty.", 1, 3, ConsoleColor.DarkGray);
-            }
-        }
-
-        private ConsoleColor GetErrorColor(LoggingLevel level)
-        {
-            switch (level)
-            {
-                case LoggingLevel.Debug:
-                    return ConsoleColor.Green;
-                case LoggingLevel.Warning:
-                    return ConsoleColor.Yellow;
-                case LoggingLevel.Critical:
-                    return ConsoleColor.Red;
-                case LoggingLevel lvl when lvl >= LoggingLevel.Warning:
-                    return ConsoleColor.DarkRed;
-                default:
-                    return ConsoleColor.Gray;
-            }
+            return this;
         }
     }
 }

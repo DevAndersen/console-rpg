@@ -37,12 +37,12 @@ namespace GameLib.Rendering.Displays
             }
             else if (id == optionLog)
             {
-                return new DisplayDebugLog(this);
+                return new DisplayDebugLog(this, Logger.GetLog().ToArray());
             }
             else if (id == optionSaveGame)
             {
                 Core.instance.SaveGame();
-                return this;
+                return previousDisplay;
             }
             else if (id == optionLoadGame)
             {

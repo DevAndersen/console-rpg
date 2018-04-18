@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLib.Mobs
 {
+    [Serializable]
     public class Drop
     {
         private static Random rand = new Random();

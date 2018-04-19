@@ -23,7 +23,7 @@ namespace GameLib.Rendering.Displays
             ConsoleKey read = ReadKey();
             if (read == ConsoleKey.E)
             {
-                return new DisplayInventory(this, GameCore.Core.instance.game.player.inventory);
+                return new DisplayInventory(this, GameCore.Core.instance.game.player.inventory, room.GetPlayer());
             }
             else if (read == ConsoleKey.Escape)
             {

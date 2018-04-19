@@ -19,12 +19,12 @@ namespace GameLib.Items.Consumables.Foods
             this.edibleType = edibleType;
         }
 
-        public override void OnConsume(MobAttackable consumingMob)
+        public override void OnConsume(MobPlayer player)
         {
-            consumingMob.Heal(HealAmount);
+            player.Heal(HealAmount);
         }
 
-        protected override string ProvideConsumeString()
+        protected override string GetConsumeString()
         {
             return edibleType == EdibleType.Food ? "Eat" : "Drink";
         }

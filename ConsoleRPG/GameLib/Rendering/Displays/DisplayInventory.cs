@@ -1,4 +1,6 @@
-﻿using GameLib.Items;
+﻿using GameLib.GameCore;
+using GameLib.Items;
+using GameLib.Mobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,12 @@ namespace GameLib.Rendering.Displays
         private Inventory inventory;
         private InventoryMode inventoryMode;
         private int swapSlot;
+        private MobPlayer player;
 
-        public  DisplayInventory(Display previousDisplay, Inventory inventory) : base(previousDisplay, inventory.GetItems().ToArray(), $"{inventory.Name}'s Inventory", true, DisplayItemListMode.ItemMode)
+        public  DisplayInventory(Display previousDisplay, Inventory inventory, MobPlayer player) : base(previousDisplay, inventory.GetItems().ToArray(), $"{inventory.Name}'s Inventory", true, DisplayItemListMode.ItemMode)
         {
             this.inventory = inventory;
+            this.player = player;
             inventoryMode = InventoryMode.Default;
         }
 
@@ -40,11 +44,16 @@ namespace GameLib.Rendering.Displays
             if (inventoryMode == InventoryMode.Default)
             {
                 prefabs.RenderMenuExit();
-                prefabs.RenderMenuBar(new MenuBarItem[]
+
+                List<MenuBarItem> menuBarItems = new List<MenuBarItem>();
+                if (inventory.GetSlot(selectedIndex)?.Item.CanBeUsed == true)
                 {
-                    new MenuBarItem(ConsoleKey.S, "Swap slots", ConsoleColor.Yellow),
-                    new MenuBarItem(ConsoleKey.D, "Destroy item", ConsoleColor.Red)
-                });
+                    menuBarItems.Add(new MenuBarItem(ConsoleKey.E, inventory.GetSlot(selectedIndex).Item.GetUseString(), ConsoleColor.Green));
+                }
+                menuBarItems.Add(new MenuBarItem(ConsoleKey.S, "Swap slots", ConsoleColor.Yellow));
+                menuBarItems.Add(new MenuBarItem(ConsoleKey.D, "Destroy item", ConsoleColor.Red));
+
+                prefabs.RenderMenuBar(menuBarItems.ToArray());
             }
             else if (inventoryMode == InventoryMode.Swap)
             {
@@ -100,6 +109,14 @@ namespace GameLib.Rendering.Displays
                 {
                     SetInventoryMode(InventoryMode.Destroy);
                     return this;
+                }
+                else if (read == ConsoleKey.E && inventory.GetSlot(selectedIndex)?.Item.CanBeUsed == true)
+                {
+                    bool consume = inventory.GetSlot(selectedIndex).Item.OnUse(player);
+                    if (consume)
+                    {
+                        inventory.ReduceSlot(selectedIndex, 1);
+                    }
                 }
             }
             else if (inventoryMode == InventoryMode.Swap)

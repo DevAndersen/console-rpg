@@ -18,12 +18,12 @@ namespace GameLib.Items.Consumables
             this.effect = effect;
         }
 
-        override public void OnConsume(MobAttackable consumingMob)
+        public override void OnConsume(MobPlayer player)
         {
-            consumingMob.AddEffect(effect);
+            player.AddEffect(effect);
         }
 
-        override protected string ProvideConsumeString()
+        protected override string GetConsumeString()
         {
             return "Drink"; 
         }

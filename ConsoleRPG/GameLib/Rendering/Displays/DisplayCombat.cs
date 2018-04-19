@@ -39,7 +39,7 @@ namespace GameLib.Rendering.Displays
             }
             else if (read == ConsoleKey.E)
             {
-                return new DisplayInventory(this, Core.instance.game.player.inventory);
+                return new DisplayInventory(this, Core.instance.game.player.inventory, Player);
             }
             return this;
         }

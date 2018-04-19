@@ -159,6 +159,15 @@ namespace GameLib.Items
             }
         }
 
+        public void ReduceSlot(int slot, int amount)
+        {
+            items[slot].Amount--;
+            if (items[slot].Amount <= 0)
+            {
+                items[slot] = null;
+            }
+        }
+
         public void ClearSlot(int slot)
         {
             items[slot] = null;

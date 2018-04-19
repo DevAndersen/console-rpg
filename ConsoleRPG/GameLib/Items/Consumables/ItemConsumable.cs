@@ -10,15 +10,24 @@ namespace GameLib.Items.Consumables
     [Serializable]
     public abstract class ItemConsumable : Item
     {
-        public string ConsomeString { get { return ProvideConsumeString(); } }
-
         public ItemConsumable(string name, bool stackable, int price = -1) : base(name, stackable, price)
         {
-
+            canBeUsed = true;
         }
 
-        public abstract void OnConsume(MobAttackable consumingMob);
+        public override bool OnUse(MobPlayer player)
+        {
+            OnConsume(player);
+            return true;
+        }
 
-        protected abstract string ProvideConsumeString();
+        public abstract void OnConsume(MobPlayer player);
+
+        public override string GetUseString()
+        {
+            return GetConsumeString();
+        }
+
+        protected abstract string GetConsumeString();
     }
 }
